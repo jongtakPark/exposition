@@ -191,7 +191,7 @@ public class MemberController{
 
 	
 	@ResponseBody
-	@PostMapping(value = "/findEmail")
+	@RequestMapping(value = "/findEmail", method= {RequestMethod.GET})
 	public HashMap<String, String> findId(@RequestParam("email") String email) {
 		MemberFormDto memDto = memberService.findByEmail(email);
 		HashMap<String, String> map = new HashMap<String, String>();

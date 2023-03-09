@@ -44,7 +44,7 @@ layout:decorate="~{layouts/layout}">
         </form>
         
         
-        <form action="/signup/findidpw" method="post">
+        <form action="/signup/findidpw" method="post" th:object="${memberFormDto}">
             <div class="per_find_body_id" id="per_find_body_id" style="display: none;">
                 <div class="id_per_form_">
                     <div class="ck_id">
@@ -57,12 +57,13 @@ layout:decorate="~{layouts/layout}">
                     </div>
                     <div class="per_form_email">
                         <div class="per_form_a"><span>이메일</span></div>
-                        <div class="per_email_text"><input type="email" name="email"></div>
+                        <div class="per_email_text"><input type="email" name="email" id="findEmail"></div>
                     </div>
                      <div class="succ_div"><span class="succ" id="sMsg" ></span></div>
                      <div class="succ_div"><span class="error" id="eMsg" ></span></div>
                     <div class="per_ck">
-                        <button id="find-id-btn">가입정보확인</button>
+                        <button id="find-id-btn" onclick="sendEmail()" type="button">가입정보확인</button>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                     </div>
                 </div>
             </div>

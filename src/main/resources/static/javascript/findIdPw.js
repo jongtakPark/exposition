@@ -30,7 +30,6 @@ $(document).ready(function(){
             $("input[name='ck'][value='아이디찾기']").prop("checked",true);
         }
     });
-
 });
 
 //일반 회원 아아디 찾기
@@ -38,11 +37,11 @@ $("#find-id-btn").click(function(){
 	var email = $("#email").val();
 	var name = $("#name").val();
 	var sMsg = $("#sMsg")
-	var ㄷMsg = $("#eMsg")
+	var eMsg = $("#eMsg")
 	$.ajax({
             type: "post",
-			url: "/mail/findid",
-			data : { "email" : email },
+			url: "/email/findid",
+			data : { "email" : email, "name" : name },
 			success : function(result){
 			console.log(result);
 				showSuccMsg(sMsg,"입력하신 이메일에서 아이디를 확인해 주세요");
@@ -52,3 +51,43 @@ $("#find-id-btn").click(function(){
 			}
 		});
 });
+
+function sendEmail(){
+	$.ajax({
+		url:"/email/findid",
+		type:"post",
+		cache:false,
+		dataType:"json",
+		data:$("#email").serialize(),
+		async:false,
+		success:function(data){
+			alert(JSON.stringify(data));
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
