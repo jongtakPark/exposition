@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "spring.mail.propertise.mail.smtp.ssl.trust",
+  "type": "java.lang.String",
+  "description": "A description for 'spring.mail.propertise.mail.smtp.ssl.trust'"
+}]}

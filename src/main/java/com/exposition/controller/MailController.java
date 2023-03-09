@@ -4,11 +4,14 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.exposition.entity.Member;
 import com.exposition.service.MailService;
+import com.exposition.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class MailController {
 
 	private final MailService mailService;
+	private final MemberService memberService;
 	
 	//회원가입시 입력한 이메일로 인증번호 메일 발송
 	@GetMapping(value="/sendmail")
@@ -33,5 +37,12 @@ public class MailController {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("result", mailService.checkCode(emailcode));
 		return map;	
+	}
+	
+	@PostMapping(value="/findid")
+	public String findId(String email,String name, Member member) throws Exception {
+		member = memberService.findByName(name);
+		String findName = mailService.sendFindIdMail(email, member);
+		return findName;
 	}
 }

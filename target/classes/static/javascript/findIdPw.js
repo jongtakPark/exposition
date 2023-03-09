@@ -37,12 +37,12 @@ $(document).ready(function(){
 $("#find-id-btn").click(function(){
 	var email = $("#email").val();
 	var name = $("#name").val();
-	var sMsg = $("#sMsg")
-	var ㄷMsg = $("#eMsg")
+	var sMsg = $("#sMsg");
+	var eMsg = $("#eMsg");
 	$.ajax({
             type: "post",
-			url: "/mail/findid",
-			data : { "email" : email },
+			url: "/email/findid",
+			data : { "email" : email, "name" : name },
 			success : function(result){
 			console.log(result);
 				showSuccMsg(sMsg,"입력하신 이메일에서 아이디를 확인해 주세요");
@@ -52,3 +52,9 @@ $("#find-id-btn").click(function(){
 			}
 		});
 });
+
+
+
+
+
+
