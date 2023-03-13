@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+layout:decorate="~{layouts/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FindIdPw</title>
+<link rel="stylesheet" th:href="@{/css/findIdPw.css}">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="findbox">
+        <div class="IdPw_title">
+            <span>아이디/비밀번호 찾기</span>
+        </div>
+        <div class="mem_title">
+            <div class="mem_a">
+                <button type="button" class="com" id="com">
+                    <span>기업회원</span>
+                </button>
+                <button type="button" class="per" id="per">
+                    <span>일반회원</span>
+                </button>
+            </div>
+        </div>
+		
+        <form action="/signup/findpw" method="get">
+            <div class="com_find_body" id="com_find_body">
+                <div class="com_form_">
+                    <div class="com_form_id">
+                        <div class="com_form_a"><span>아이디(사업자번호)</span></div>
+                        <div class="com_id_text"><input type="text" name="com"></div>
+                    </div>
+                    <div class="com_form_email">
+                        <div class="com_form_a"><span>이메일</span></div>
+                        <div class="com_email_text"><input type="email" name="email"></div>
+                    </div>
+                    <div class="com_ck">
+                        <button>가입정보확인</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        
+        <form action="/signup/findidpw" method="post">
+            <div class="per_find_body_id" id="per_find_body_id" style="display: none;">
+                <div class="id_per_form_">
+                    <div class="ck_id">
+                        <input type="radio"  name="ck" value="아이디찾기" checked>아이디 찾기
+                        <input type="radio"  name="ck" value="비밀번호찾기" >비밀번호 찾기
+                    </div>
+                    <div class="per_form_id">
+                        <div class="per_form_a"><span>이름</span></div>
+                        <div class="per_id_text"><input type="text" name="name"></div>
+                    </div>
+                    <div class="per_form_email">
+                        <div class="per_form_a"><span>이메일</span></div>
+                        <div class="per_email_text"><input type="email" name="email"></div>
+                    </div>
+                     <div class="succ_div"><span class="succ" id="sMsg" ></span></div>
+                     <div class="succ_div"><span class="error" id="eMsg" ></span></div>
+                    <div class="per_ck">
+                        <button id="find-id-btn">가입정보확인</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        <form action="/signup/findpw" method="get">
+            <div class="per_find_body_pw" id="per_find_body_pw"  style="display: none;">
+                <div class="pw_per_form_">
+                    <div class="ck_id">
+                        <input type="radio"  name="ck1" value="아이디찾기" >아이디 찾기
+                        <input type="radio"  name="ck1" value="비밀번호찾기" >비밀번호 찾기
+                    </div>
+                    <div class="per_form_id">
+                        <div class="per_form_a"><span>아이디</span></div>
+                        <div class="per_id_text"><input type="text" name="name"></div>
+                    </div>
+                    <div class="per_form_email">
+                        <div class="per_form_a"><span>이메일</span></div>
+                        <div class="per_email_text"><input type="email" name="email"></div>
+                    </div>
+                    <div class="per_ck">
+                        <button>가입정보확인</button>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="/javascript/findIdPw.js"></script>
+        </form>
+
+    </div>
+    </div>
+</body>
+</html>

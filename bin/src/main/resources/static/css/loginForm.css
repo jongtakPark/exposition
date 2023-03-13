@@ -1,0 +1,57 @@
+    .main_login{
+        width: 50%;
+        margin: auto;
+        margin-top : 100px;
+        height : 619px;
+    }
+    
+    .login_{
+        font-size: 40px;
+        margin: auto;
+        width: 18%;
+    }
+    
+    .login_id{
+        width: 40%;
+        height: 40px;
+        margin-left: 260px;
+        margin-top: 100px;
+    }
+    
+    .login_pw{
+        width: 40%;
+        height: 40px;
+        margin-left: 260px;
+        margin-top: 30px;
+    }
+    
+    
+    .membership{
+        margin-left: 170px;
+    }
+    
+    .login > button{
+        font-size: 20px;
+        width: 40%;
+        height: 40px;
+        margin-left: 260px;
+        margin-top: 30px;
+    }
+    
+    .findlogin{
+        width: 45%;
+        margin-left: 27%;
+        margin-top: 10px;
+    }
+    
+    .findlogin > span >a{
+        text-decoration: none;
+        color: black;
+    }
+    
+    .error {
+     	margin-left: 29%;
+     	margin-top: 10px;
+    	font-size: 20px;
+    	color: red;
+    }

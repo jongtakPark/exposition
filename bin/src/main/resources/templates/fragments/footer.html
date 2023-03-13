@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>footer</title>
+</head>
+<body>
+        <div class="footer" th:fragment="footer">
+        <link rel="stylesheet" th:href="@{/css/footer.css}">
+            <div class="footer_con">
+                <p>문 의 처 : 여수시 섬자원개발과</p>
+                <p>전 화 번 호 : 061-659-3959(장원석)</p>
+                <p>이 메 일 : withwsj@korea.kr</p>
+            </div>
+            
+            <div class="familysite">
+                <select name="sitelist">
+                    <option value="#">관련기관사이트</option>
+                    <option value="#">패밀리사이트1</option>
+                    <option value="#">패밀리사이트2</option>
+                    <option value="#">패밀리사이트3</option>
+                </select>
+            </div>
+        </div>
+</body>
+
+</html>

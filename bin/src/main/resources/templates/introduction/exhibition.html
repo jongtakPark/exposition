@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Directions</title>
+<link rel="stylesheet" th:href="@{/css/exhibition.css}">
+</head>
+<body>
+<div layout:fragment="content">
+    
+    <div class="subMenu">
+        <ul>
+            <li><a href="#">전시관안내</a></li>
+            <li><a href="#">행사장오시는길</a></li>
+            <li><a href="#">포토갤러리</a></li>
+            <li><a href="#">여수섬키워드</a></li>
+        </ul>
+    </div>
+    <div class="content1">
+        <div class="content_inner_top">
+            <h1>전시관 안내</h1>
+        </div>
+        <div class="content_inner">
+            <img th:src="@{/images/exhibition.png}">
+        </div>
+    </div>
+    <div class="content_ex">
+        <div class="content_ex_inner">
+            <ul>
+                <li>기간</li>
+                <li>2026년 7월 17일 ~ 2026년 8월 16일</li>
+                <li>장소</li>
+                <li>대한민국 여수</li>
+                <li>주제</li>
+                <li>섬, 바다와 미래를 잇다</li>
+            </ul>
+        </div>
+    </div>
+
+        
+    </div>
+</div>
+</body>
+</html>

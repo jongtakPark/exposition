@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>loginForm</title>
+<link rel="stylesheet" th:href="@{/css/loginForm.css}">
+</head>
+<body>
+    <div layout:fragment="content">
+     <div class="main_login">
+          <div class="login_">
+               <span>로그인</span>
+           </div><br>
+           <form method="post" action="/signup/login">
+
+            <input type="text" placeholder="아이디" class="login_id" name="mid" ><br>
+
+                <input type="password" placeholder="비밀번호" class="login_pw" name="password"><br>
+                <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
+                <div class="login">
+                    <button>로그인</button>
+                </div>
+                <div class="findlogin">
+                    <span class="find_idpw"><a href="/signup/findidpw">아이디/비밀번호 찾기</a></span>
+                    <span class="membership"><a href="/signup/agreement">회원가입</a></span>
+                </div>
+                
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                
+            </form>
+        </div>
+
+    
+</body>
+</html>

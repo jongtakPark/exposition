@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Company</title>
+<link rel="stylesheet" th:href="@{/css/companySignUp.css}">
+
+</head> 
+<body>
+    <div layout:fragment="content">
+        <div class="main_membership">
+            <div class="title_membership">
+                <span>회원가입</span>
+            </div>
+            <div class="title_ent">
+                <span>기업회원</span>
+            </div>
+             <form action="/signup/comnew" method="post" th:object="${companyFormDto}" onsubmit="return submitCheck();">           
+            
+             <div class="com_a">
+                 <div class="com_id"><span>아이디(사업자번호)</span></div>
+                 <div><input  class="com_tex" name="mid" id="com" th:field="*{com}" type="text"  maxlength="10" placeholder="  -를 제외하고 입력해주세요"></div>
+                 <div class="com_id_ck"><span><a href="#" class="com_ck">중복검사</a></span></div>
+             </div>
+              <p th:if="${#fields.hasErrors('com')}"  th:errors="*{com}" class="fieldError" id="fieldErrorMid">Incorrect data</p>  
+             <div class="error_div"><span class="error" id="comMsg" ></span></div>
+             <div class="succ_div"><span class="succ" id="comMsg2" ></span></div>
+             
+             
+            <div class="com_b">
+                 <div class="com_pw"><span>비밀번호</span></div>
+                 <div><input class="com_tex" type="password"  name="password" id="password" th:field="*{password}" placeholder="  비밀번호를 입력해주세요"></div>
+             </div>
+             <p th:if="${#fields.hasErrors('password')}"  th:errors="*{password}" class="fieldError" id="fieldErrorPw">Incorrect data</p> 
+             <div class="error_div"><span class="error" id="passwordMsg" ></span></div>
+             
+             <div class="com_c">
+                 <div class="com_pw_ck"><span>비밀번호확인</span></div>
+                 <div><input class="com_tex" type="password" name="password2" id="password2" th:field="*{confirmPassword}" placeholder="  비밀번호를 입력해주세요"></div>
+             </div>
+             <div class="error_div"><span class="error" id="passwordMsg1" ></span></div>
+             <div class="succ_div"><span class="succ" id="passwordMsg2" ></span></div>    
+             
+             
+             <div class="com_d">
+                 <div class="com_pw_ck"><span>기업명</span></div>
+                 <div><input class="com_tex" type="text" name="name" id="name" th:field="*{name}" placeholder="  기업명을 입력해주세요"></div>
+             </div>
+             <p th:if="${#fields.hasErrors('name')}"  th:errors="*{name}" class="fieldError" id="fieldErrorName">Incorrect data</p> 
+             <div class="error_div"><span class="error" id="nameMsg" ></span></div>
+             
+             <div class="com_e">
+                 <div class="com_mail"><span>이메일</span></div>
+                 <div><input class="com_tex" type="email"  name="email" id="email" th:field="*{email}" placeholder="  이메일을 입력해주세요"></div>
+                 <div class="com_mail_send"><span><a href="#" id="emailsend">인증번호 발송</a></span></div>
+             </div>
+         <p th:if="${#fields.hasErrors('email')}"  th:errors="*{email}" class="fieldError" id="fieldErrorEmail">Incorrect data</p>
+             <div class="error_div"><span class="error" id="emailMsg" ></span></div>
+             <div class="succ_div"><span class="succ" id="emailMsg2" ></span></div>
+             
+             <div class="com_f">
+                <div class="com_mail_a"><span></span></div>
+                 <div><input class="com_tex" th:field="*{confirmEmail}" placeholder="  인증번호를 입력해주세요" id="emailcode"></div>
+                 <div class="com_mail_ck"><span><a href="#" id="emailcheck">인증확인</a></span></div>
+             </div>
+             <div class="error_div"><span class="error" id="emailCheckMsg" ></span></div>
+             <div class="succ_div"><span class="succ" id="emailCheckMsg2" ></span></div>
+             <div class="com_g">
+                 <div class="com_tel"><span>전화번호(선택)</span></div>
+                 <div><input class="com_tex" type="tel" th:field="*{tel}" name="tel" id="tel" oninput="autoHyphen(this)" maxlength="13" placeholder="  전화번호를 입력해주세요"></div>
+             </div>
+             <div class="error_div"><span class="error" id="telMsg" ></span></div>
+             <input type="submit" class="regist" id="regist" value="가입하기">
+             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+             <script type="text/javascript" src="/javascript/company.js"></script>
+             </form>  
+        
+        </div>
+                        
+    </div>
+
+
+</body>
+
+</html>

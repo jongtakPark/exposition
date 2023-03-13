@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>survey</title>
+<link rel="stylesheet" th:href="@{/css/survey.css}">
+</head>
+<body>
+    <div layout:fragment="content">
+    <div class="subMenu">
+       <ul>
+           <li><a href="#">전시관안내</a></li>
+           <li><a href="#">행사장오시는길</a></li>
+           <li><a href="#">포토갤러리</a></li>
+           <li><a href="#">여수섬키워드</a></li>
+       </ul>
+   </div>
+        <div class="survey">
+            <div class="title_survey">
+                <h1>설문조사</h1>
+            </div>
+            
+            <div class="survey_box">
+                <div class="survey_ck">
+                    <p>1.원하는 정보에 관한 만족도 조사</p>
+                    <input type="radio" name="ck1"   />매우만족<br>
+                    <input type="radio" name="ck1"   />만족<br>
+                    <input type="radio" name="ck1"   />보통<br>
+                    <input type="radio" name="ck1"   />불만족<br>
+                    <input type="radio" name="ck1"   />매우불만족<br>
+                </div>
+                <div class="survey_ck">
+                    <p>2.추후 수정</p>
+                    <input type="radio" name="ck2"   />매우만족<br>
+                    <input type="radio" name="ck2"   />만족<br>
+                    <input type="radio" name="ck2"   />보통<br>
+                    <input type="radio" name="ck2"   />불만족<br>
+                    <input type="radio" name="ck2"   />매우불만족<br>
+                </div>
+                <div class="survey_ck">
+                    <p>3.추후 수정</p>
+                    <input type="radio" name="ck2"   />매우만족<br>
+                    <input type="radio" name="ck2"   />만족<br>
+                    <input type="radio" name="ck2"   />보통<br>
+                    <input type="radio" name="ck2"   />불만족<br>
+                    <input type="radio" name="ck2"   />매우불만족<br>
+                </div>
+                <div class="survey_ck">
+                    <p>4.추후 수정</p>
+                    <input type="radio" name="ck2"   />매우만족<br>
+                    <input type="radio" name="ck2"   />만족<br>
+                    <input type="radio" name="ck2"   />보통<br>
+                    <input type="radio" name="ck2"   />불만족<br>
+                    <input type="radio" name="ck2"   />매우불만족<br>
+                </div>
+                <div class="submit">
+                    <a th:href="@{/signup/change/{id}(id=${session.id})}">제출하기</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+
+</body>
+
+</html>
