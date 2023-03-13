@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposition.entity.Company;
 import com.exposition.entity.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -76,6 +77,18 @@ public class MailService {
 	        mailMessage.setText(mailContent, "utf-8", "html");  
 	        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 	        mailSender.send(mailMessage); // <--회원가입시 email란에 입력한 이메일주소로 인증메일이 보내진다.
+	        
+	      return CompletableFuture.completedFuture(authKey);
+	    }
+	@Async 
+	public CompletableFuture<String> sendFindCPwMail(String email, Company company) throws MessagingException{
+	   String authKey = createKey();
+	    MimeMessage mailMessage = mailSender.createMimeMessage();
+	    String mailContent = company.getCom() +" 님의 임시 비밀번호 : "+ authKey ;    
+	        mailMessage.setSubject("여수세계섬박람회 메일", "utf-8"); 
+	        mailMessage.setText(mailContent, "utf-8", "html");  
+	        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+	        mailSender.send(mailMessage); 
 	        
 	      return CompletableFuture.completedFuture(authKey);
 	    }

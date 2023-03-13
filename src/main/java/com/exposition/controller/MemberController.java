@@ -193,25 +193,68 @@ public class MemberController{
 	}
 	
 	//일반회원 아이디 찾기(input태그에 적은 이름과 이메일의 회원이 다른경우에 에러를 보내는건 안함 나중에..)
+//	@PostMapping(value="/findid")
+//	@ResponseBody
+//	public HashMap<String, Object> findId(@RequestParam("name") String name, @RequestParam("email") String email) throws MessagingException {
+//		Member member = memberService.findByName(name);
+//		Member mem = memberService.findByEmail(email);
+//		HashMap<String, Object> map = new HashMap<>();
+//		map.put("result", mailService.sendFindIdMail(email, member));
+//		return map;
+//	}
+	//일반회원 아이디 찾기(이름과 이메일 다른경우 에러)
 	@PostMapping(value="/findid")
 	@ResponseBody
-	public HashMap<String, Object> findId(@RequestParam("name") String name, @RequestParam("email") String email) throws MessagingException {
-		Member member = memberService.findByName(name);
-		Member mem = memberService.findByEmail(email);
+	public HashMap<String, Object> findID(@RequestParam("name") String name, @RequestParam("email") String email) throws MessagingException {
+		Member member = memberService.findByNameAndEmail(name, email);
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("result", mailService.sendFindIdMail(email, member));
 		return map;
 	}
 	
 	//일반 회원 비밀번호 찾기 CompletableFuture으로 return 된 값은 .get()으로 가져온다.
+//	@PostMapping(value="/findpw")
+//	@ResponseBody
+//	public String findPw(String mid, String email) throws MessagingException, InterruptedException, ExecutionException {
+//		Member member = memberService.findByMid(mid);
+//		String password =mailService.sendFindPwMail(email, member).get();
+//		String pw= passwordEncoder.encode(password);
+//		member.setPassword(pw);
+//		memberService.updateMember(member);
+//		return "success";
+//	}
+	//일반 회원 비밀번호 찾기(아이디와 이메일 다른경우 에러)
 	@PostMapping(value="/findpw")
 	@ResponseBody
 	public String findPw(String mid, String email) throws MessagingException, InterruptedException, ExecutionException {
-		Member member = memberService.findByMid(mid);
+		Member member = memberService.findByMidAndEmail(mid, email);
 		String password =mailService.sendFindPwMail(email, member).get();
 		String pw= passwordEncoder.encode(password);
 		member.setPassword(pw);
 		memberService.updateMember(member);
+		return "success";
+	}
+	
+	//기업 회원 비밀번호 찾기
+//	@PostMapping(value="/findcpw")
+//	@ResponseBody
+//	public String findCPw(String com, String email) throws MessagingException, InterruptedException, ExecutionException {
+//		Company company = companyService.findByCom(com);
+//		String password = mailService.sendFindCPwMail(email, company).get();
+//		String pw = passwordEncoder.encode(password);
+//		company.setPassword(pw);
+//		companyService.updateCompany(company);
+//		return "success";
+//	}
+	//기업 회원 비밀번호 찾기(사업자번호와 이메일 불일치 시 에러)
+	@PostMapping(value="/findcpw")
+	@ResponseBody
+	public String findCPw(String com, String email) throws MessagingException, InterruptedException, ExecutionException {
+		Company company = companyService.findByComAndEmail(com, email);
+		String password = mailService.sendFindCPwMail(email, company).get();
+		String pw = passwordEncoder.encode(password);
+		company.setPassword(pw);
+		companyService.updateCompany(company);
 		return "success";
 	}
 }

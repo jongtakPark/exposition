@@ -66,7 +66,6 @@ public class Member {
 		member.setMid(memberFormDto.getMid());
 		member.setName(memberFormDto.getName());
 		String password = passwordEncoder.encode(memberFormDto.getPassword());
-		
 		member.setPassword(password);
 //		String comfirmPw = passwordEncoder.encode(memberFormDto.getConfirmPassword());
 //		member.setConfirmPassword(comfirmPw);

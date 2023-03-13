@@ -109,5 +109,23 @@ public class MemberService implements UserDetailsService {
 			throw new NullPointerException("가입된 회원이 아닙니다");
 		}
 	}
+	//회원 찾기(등록된 이름과 이메일 일치여부 확인) - 아이디찾기
+	public Member findByNameAndEmail(String name, String email) {
+		Member member = memberRepository.findByNameAndEmail(name, email);
+		if(member!=null) {
+			return member;
+		} else {
+			throw new NullPointerException("가입된 회원이 아닙니다");
+		}
+	}
+	//회원 찾기(등록된 아이디와 이메일 일치여부 확인) - 비밀번호찾기
+	public Member findByMidAndEmail(String mid, String email) {
+		Member member = memberRepository.findByMidAndEmail(mid, email);
+		if(member!=null) {
+			return member;
+		} else {
+			throw new NullPointerException("가입된 회원이 아닙니다");
+		}
+	}
 	
 }
