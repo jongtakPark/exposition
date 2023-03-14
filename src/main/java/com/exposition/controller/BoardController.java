@@ -1,5 +1,6 @@
 package com.exposition.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exposition.dto.FreeBoardDto;
+import com.exposition.dto.VolunteerDto;
 import com.exposition.entity.FreeBoard;
+import com.exposition.entity.Volunteer;
 import com.exposition.service.BoardService;
+import com.exposition.service.VolunteerService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +34,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BoardController {
 	private final BoardService boardService;
+	private final VolunteerService volunteerService;
 	
 	//설문조사게시판
 	@GetMapping(value="/survey")
@@ -117,4 +122,68 @@ public class BoardController {
 		boardService.deleteBoard(id);
 		return "redirect:/board/freeboard";
 	}
+	
+	
+	//자원봉사게시판
+	@GetMapping(value="/volunteer")
+	public String volunteerList(Model model){        
+		List list = volunteerService.volunteerList();
+        model.addAttribute("volunteer",list);
+        
+        return "board/volunteer";
+	
+	}
+	
+	//자원봉사글쓰기 페이지로 이동
+	@GetMapping(value="/volunteerwrite")
+	public String voluteerwrite(Model model) {
+		model.addAttribute("volunteerDto", new VolunteerDto());
+		return "board/vwrite";
+	}
+	
+	//자원봉사 글 쓰기
+	@PostMapping(value="/vnew")
+	public String write(VolunteerDto volunteerDto) {
+		Volunteer volunteer = Volunteer.createvolunteer(volunteerDto);
+		volunteerService.saveVolunteer(volunteer);
+		return "redirect:/board/volunteer";
+		}
+	
+	// 자원봉사게시글 상세보기
+		@GetMapping(value="/vview/{id}")
+		public String boardVview(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+			Optional<Volunteer> view = volunteerService.findVolunteer(id);
+			HttpSession session = request.getSession();
+			session.setAttribute("title", view.get().getTitle());
+			session.setAttribute("content", view.get().getContent());
+			session.setAttribute("id", view.get().getId());
+			model.addAttribute("title", view.get().getTitle());
+			model.addAttribute("content", view.get().getContent());
+			model.addAttribute("created", view.get().getCreatedBy());
+			model.addAttribute("session",session);
+			return "board/vview";
+		}
+		
+	//자원봉사게시글 수정창으로 이동
+		@GetMapping(value="/vmodify")
+		public String modifyVview(Model model) {
+			model.addAttribute("volunteerDto", new VolunteerDto());
+			return "board/vupdatewrite";
+		}
+		
+	//자원봉사게시글 수정등록
+		@PutMapping(value="/vmodcomplete/{id}")
+		public String vmodComplete(@PathVariable("id") Long id, @RequestParam("title") String title, @RequestParam("content") String content,VolunteerDto volunteerDto, Model model) {
+			Volunteer volunteer  = volunteerService.updateVolunteer(id);
+			volunteerDto.setTitle(title);
+			volunteerDto.setContent(content);
+			volunteerDto.setId(id);
+			volunteer = Volunteer.createvolunteer(volunteerDto);
+			volunteerService.saveVolunteer(volunteer);
+			// model.addAttribute("freeboard",boardService.boardList()));
+			return "redirect:/board/volunteer";
+		}
+	
+	
+	
 }

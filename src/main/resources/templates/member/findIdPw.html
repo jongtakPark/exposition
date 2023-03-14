@@ -32,7 +32,7 @@ layout:decorate="~{layouts/layout}">
                 <div class="com_form_">
                     <div class="com_form_id">
                         <div class="com_form_a"><span>아이디(사업자번호)</span></div>
-                        <div class="com_id_text"><input type="text" name="com" id="com1"></div>
+                        <div class="com_id_text"><input type="text" name="com" id="com1" maxlength="10" placeholder="  -를 제외하고 입력해주세요"></div>
                     </div>
                     <div class="com_form_email">
                         <div class="com_form_a"><span>이메일</span></div>
@@ -85,21 +85,12 @@ layout:decorate="~{layouts/layout}">
                     </div>
                     <div class="per_form_email">
                         <div class="per_form_a"><span>이메일</span></div>
-<<<<<<< HEAD
-                        <div class="per_email_text"><input type="email" name="email" placeholder="이메일" id="findEmail"></div>
-=======
                         <div class="per_email_text"><input type="email" name="email" id="email2"></div>
->>>>>>> origin/main
                     </div>
                     <div class="succ_div"><span class="succ" id="sMsg2" ></span></div>
                     <div class="succ_div"><span class="error" id="eMsg2" ></span></div>
                     <div class="per_ck">
-<<<<<<< HEAD
-                        <button>가입정보확인</button>
-                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-=======
                         <button id="find-pw-btn">가입정보확인</button>
->>>>>>> origin/main
                     </div>
                 </div>
             </div>

@@ -39,10 +39,5 @@ public class MailController {
 		return map;	
 	}
 	
-	@PostMapping(value="/findid")
-	public String findId(String email,String name, Member member) throws Exception {
-		member = memberService.findByName(name);
-		String findName = mailService.sendFindIdMail(email, member);
-		return findName;
-	}
+	
 }
