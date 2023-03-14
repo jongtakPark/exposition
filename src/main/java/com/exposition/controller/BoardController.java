@@ -2,7 +2,6 @@ package com.exposition.controller;
 
 import java.util.Optional;
 
-import javax.print.attribute.SetOfIntegerSyntax;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,12 +11,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exposition.dto.FreeBoardDto;
@@ -96,7 +95,7 @@ public class BoardController {
 	@GetMapping(value="/modify")
 	public String modifyView(Model model) {
 		model.addAttribute("freeBoardDto", new FreeBoardDto());
-		return "board/boardwrite";
+		return "board/updatewrite";
 	}
 	
 	//게시글 수정등록
@@ -109,6 +108,13 @@ public class BoardController {
 		freeBoard = FreeBoard.createfreeBoard(freeBoardDto);
 		boardService.saveBoard(freeBoard);
 		// model.addAttribute("freeboard",boardService.boardList()));
+		return "redirect:/board/freeboard";
+	}
+	
+	//게시글 삭제(DeleteMapping을 사용하기 위해서 view.html에 form을 추가해서 사용해야 함)
+	@DeleteMapping(value="/delete/{id}")
+	public String deleteBoard(@PathVariable Long id) {
+		boardService.deleteBoard(id);
 		return "redirect:/board/freeboard";
 	}
 }

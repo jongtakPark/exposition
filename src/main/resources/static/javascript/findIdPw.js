@@ -32,29 +32,111 @@ $(document).ready(function(){
     });
 
 });
+//ajax post 이용시 csrf의 token이 누락되면 403에러가 발생한다.
+var header = $("meta[name='_csrf_header']").attr('content');
+var token = $("meta[name='_csrf']").attr('content');
 
-//일반 회원 아아디 찾기
+//일반 회원 아아디 찾기(HashMap으로 값 받을 때)
 $("#find-id-btn").click(function(){
-	var email = $("#email").val();
+	var email = $("#email1").val();
 	var name = $("#name").val();
+<<<<<<< HEAD
 	var sMsg = $("#sMsg");
 	var eMsg = $("#eMsg");
 	$.ajax({
             type: "post",
 			url: "/email/findid",
 			data : { "email" : email, "name" : name },
+=======
+	var sMsg = $("#sMsg1")
+	var eMsg = $("#eMsg1")
+	$.ajax({
+            type: "post",
+			url: "/signup/findid",
+			data : { "email" : email,  "name" : name },
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+    		},
+>>>>>>> origin/main
 			success : function(result){
-			console.log(result);
 				showSuccMsg(sMsg,"입력하신 이메일에서 아이디를 확인해 주세요");
+				eMsg.hide();
 			},
 			error : function(){
 				showErrorMsg(eMsg,"이름 또는 이메일을 다시 확인해주세요.");
+				sMsg.hide();
+			}
+		});
+});
+
+<<<<<<< HEAD
+
+
+
+
+
+=======
+//일반 회원 비밀번호 찾기(String으로 값 받을때)
+$("#find-pw-btn").click(function(){
+	var mid = $("#mid").val();
+	var email = $("#email2").val();
+	var sMsg = $("#sMsg2")
+	var eMsg = $("#eMsg2")
+	var sendData = "mid="+mid+"&email="+email;
+	$.ajax({
+            type: "post",
+			url: "/signup/findpw",
+			data : sendData,
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+    		},
+			success : function(result){
+				showSuccMsg(sMsg,"입력하신 이메일에서 임시 비밀번호를 확인해 주세요");
+				eMsg.hide();
+			},
+			error : function(){
+				showErrorMsg(eMsg,"이름 또는 이메일을 다시 확인해주세요.");
+				sMsg.hide();
 			}
 		});
 });
 
 
+//기업 회원 비밀번호 찾기(String으로 값 받을때)
+$("#find-com-pw-btn").click(function(){
+	var com = $("#com1").val();
+	var email = $("#email").val();
+	var sMsg = $("#sMsg")
+	var eMsg = $("#eMsg")
+	var sendData = "com="+com+"&email="+email;
+	$.ajax({
+            type: "post",
+			url: "/signup/findcompw",
+			data : sendData,
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+    		},
+			success : function(result){
+				showSuccMsg(sMsg,"입력하신 이메일에서 임시 비밀번호를 확인해 주세요");
+				eMsg.hide();
+			},
+			error : function(){
+				showErrorMsg(eMsg,"이름 또는 이메일을 다시 확인해주세요.");
+				sMsg.hide();
+			}
+		});
+});
 
 
-
-
+ function showErrorMsg(obj, msg) {
+        obj.attr("class", "error");
+        obj.html(msg);
+        obj.show();
+    }
+    
+    function showSuccMsg(obj, msg) {
+        obj.attr("class", "succ");
+        obj.html(msg);
+        obj.show();
+    }
+>>>>>>> origin/main

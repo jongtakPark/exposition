@@ -55,33 +55,59 @@ public class MemberService implements UserDetailsService {
 	public Optional<Member> findById(Long id) {
 		return memberRepository.findById(id);
 	}
-	//유저 회원 변경(권한)
+	
+	//유저 회원 변경
 	public Member updateMember(Member member) {
 		return memberRepository.save(member);
 	}
 	
 
 	// MemberDto -> Member 변환
-		private Member change(Member ori, MemberFormDto dto) {
-			System.out.println(dto);
-			ori.setName(dto.getName());
-			ori.setEmail(dto.getEmail());
-			if (!dto.getPassword().isEmpty())
-				ori.setPassword(dto.getPassword());
-			return ori;
-		}
+//		private Member change(Member ori, MemberFormDto dto) {
+//			System.out.println(dto);
+//			ori.setName(dto.getName());
+//			ori.setEmail(dto.getEmail());
+//			if (!dto.getPassword().isEmpty())
+//				ori.setPassword(dto.getPassword());
+//			return ori;
+//		}
 		
 		// Email 체크
-		public MemberFormDto findByEmail(String email) {
-			Member mem = memberRepository.findByEmail(email);
-			if (mem != null)
-				return MemberFormDto.createMemberDto(mem);
-			return null;
+		// public MemberFormDto findByEmail(String email) {
+		// 	Member mem = memberRepository.findByEmail(email);
+		// 	if (mem != null)
+		// 		return MemberFormDto.createMemberDto(mem);
+		// 	return null;
+		// }
+
+	//이름과 이메일로으로 유저 찾기
+	public Member findByNameAndEmail(String name, String email) {
+		Member member = memberRepository.findByNameAndEmail(name, email);
+		if(member!=null) {
+			return member;
+		} else {
+			throw new NullPointerException("가입된 회원이 아닙니다");
 		}
-
-	//이름으로 유저 찾기
-	public Member findByName(String name) {
-		return memberRepository.findByName(name);
 	}
-
+	
+	//아이디와 이메일로 유저 찾기
+	public Member findByMidAndEmail(String mid, String email) {
+		Member member = memberRepository.findByMidAndEmail(mid, email);
+		if(member!=null) {
+			return member;
+		} else {
+			throw new NullPointerException("가입된 회원이 아닙니다");
+		}
+	}
+	
+	//아이디로 회원 찾기
+	public Member findByMid(String mid) {
+		Member member = memberRepository.findByMid(mid);
+		if(member!=null) {
+			return member;
+		} else {
+			throw new NullPointerException("가입된 회원이 아닙니다");
+		}
+	}
+	
 }

@@ -22,13 +22,20 @@
 
 
 .title{
-    border-bottom: 1px solid black;
+    width: 100%;
+    height: 50px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.title > h1 {
+	font-size : 45px;
 }
 
 /* 주변관광지*/
 .container{
     width: 70%;
-    height: 800px;
+    height: 850px;
     margin: auto;
     position: relative;
     border: 1px solid red;
@@ -44,15 +51,18 @@
     border: 1px solid blue;
 }
 
-.photo > .photo_pic{
-    width: 330px;
-    height: 150px;
+.photo .photo_pic{
+    width: 100%;
+    height: 200px;
     margin: auto;
-    margin-top: 10px;
     border: 1px solid red;
 }
+.photo .photo_pic img{
+    width: 100%;
+    height: 200px;
+}
 
-.photo > .photo_tit{
+.photo .photo_tit{
     width: 150px;
     height: 50px;
     margin: auto;
@@ -61,12 +71,12 @@
     border: 1px solid blue;
 }
 
-.photo > .photo_tit > span{
+.photo .photo_tit span{
     font-weight: bold;
     font-size: 20px;
 }
 
-.photo > .photo_con{
+.photo .photo_con span{
     width: 300px;
     height: 85px;
     margin: auto;
@@ -84,7 +94,6 @@
     height: 50px;
     margin: auto;
     margin-top: 25px;
-    border: 1px solid red;;
 }
 
 .wrap > .regist{

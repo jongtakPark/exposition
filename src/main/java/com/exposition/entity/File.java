@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
-@Table(name="boardfile")
+@Table(name="files")
 @RequiredArgsConstructor
 public class File extends BaseEntity {
 
@@ -29,10 +29,10 @@ public class File extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	//추가 파일
+	//처음 파일 이름을 바꾼 이름
 	private String img;
 
-	//현재 파일
+	//처음 파일 이름
 	private String oriImg;
 	
 	//썸네일
@@ -45,6 +45,10 @@ public class File extends BaseEntity {
 	@JoinColumn(name="tourboard_id")
 	private TourBoard tourboard;
 	
+	@ManyToOne
+	@JoinColumn(name="freeboard_id")
+	private FreeBoard freeBoard;
+	
 	public static File createFile(FileDto fileDto) {
 		File file = new File();
 		file.setId(fileDto.getId());
@@ -53,6 +57,12 @@ public class File extends BaseEntity {
 		file.setThumbnail(fileDto.getThumbnail());
 		file.setSavePath(fileDto.getSavePath());
 		return file;
+	}
+	
+	public void updateFile(String img, String oriImg, String savePath) {
+		this.img = img;
+		this.oriImg = oriImg;
+		this.savePath = savePath;
 	}
 	
 }
