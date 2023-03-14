@@ -138,7 +138,7 @@ public class BoardController {
 	@GetMapping(value="/volunteerwrite")
 	public String voluteerwrite(Model model) {
 		model.addAttribute("volunteerDto", new VolunteerDto());
-		return "board/vwrite";
+		return "board/volwrite";
 	}
 	
 	//자원봉사 글 쓰기
@@ -161,14 +161,14 @@ public class BoardController {
 			model.addAttribute("content", view.get().getContent());
 			model.addAttribute("created", view.get().getCreatedBy());
 			model.addAttribute("session",session);
-			return "board/vview";
+			return "board/volview";
 		}
 		
 	//자원봉사게시글 수정창으로 이동
 		@GetMapping(value="/vmodify")
 		public String modifyVview(Model model) {
 			model.addAttribute("volunteerDto", new VolunteerDto());
-			return "board/vupdatewrite";
+			return "board/volupdatewrite";
 		}
 		
 	//자원봉사게시글 수정등록
