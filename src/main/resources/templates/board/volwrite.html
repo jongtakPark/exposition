@@ -12,10 +12,10 @@ layout:decorate="~{layouts/layout}">
 <div layout:fragment="content">
  <div class="subMenu">
        <ul>
-           <li><a href="#">전시관안내</a></li>
-           <li><a href="#">행사장오시는길</a></li>
-           <li><a href="#">포토갤러리</a></li>
-           <li><a href="#">여수섬키워드</a></li>
+         <li><a href="#">관람후기</a></li>
+           <li><a href="#">국민아이디어</a></li>
+           <li><a href="#">설문게시판</a></li>
+           <li><a href="#" sec:authorize="hasAnyAuthority('ROLE_VOLUNTEER')">자원봉사게시판</a></li>
        </ul>
    </div>
    <div class="freeboard">

@@ -223,7 +223,8 @@ public class MemberController{
 		company.setPassword(pw);
 		companyService.updateCompany(company);
 		return "success";
-	}
+	}	
+
 	
 	
 }
