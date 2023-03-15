@@ -205,10 +205,23 @@ public class MemberController{
 	//일반회원 아이디 찾기(이름과 이메일 다른경우 에러)
 	@PostMapping(value="/findid")
 	@ResponseBody
+<<<<<<< HEAD
 	public HashMap<String, Object> findID(@RequestParam("name") String name, @RequestParam("email") String email) throws MessagingException {
 		Member member = memberService.findByNameAndEmail(name, email);
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("result", mailService.sendFindIdMail(email, member));
+=======
+	@RequestMapping(value = "/findEmail", method= {RequestMethod.GET})
+	public HashMap<String, String> findId(@RequestParam("email") String email) {
+		MemberFormDto memDto = memberService.findByEmail(email);
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		if (memDto.getMid() == null) {
+			map.put("answer", "Fail");
+		} else {
+			map.put("answer", "Success");
+		}
+>>>>>>> bc6b3ca62ca2595374a8d0b751c7436558ed994f
 		return map;
 	}
 	

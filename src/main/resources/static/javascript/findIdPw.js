@@ -30,7 +30,6 @@ $(document).ready(function(){
             $("input[name='ck'][value='아이디찾기']").prop("checked",true);
         }
     });
-
 });
 //ajax post 이용시 csrf의 token이 누락되면 403에러가 발생한다.
 var header = $("meta[name='_csrf_header']").attr('content');
@@ -40,6 +39,7 @@ var token = $("meta[name='_csrf']").attr('content');
 $("#find-id-btn").click(function(){
 	var email = $("#email1").val();
 	var name = $("#name").val();
+<<<<<<< HEAD
 	var sMsg = $("#sMsg1")
 	var eMsg = $("#eMsg1")
 	$.ajax({
@@ -49,6 +49,14 @@ $("#find-id-btn").click(function(){
 			beforeSend: function(xhr){
         		xhr.setRequestHeader(header, token);
     		},
+=======
+	var sMsg = $("#sMsg")
+	var eMsg = $("#eMsg")
+	$.ajax({
+            type: "post",
+			url: "/email/findid",
+			data : { "email" : email, "name" : name },
+>>>>>>> bc6b3ca62ca2595374a8d0b751c7436558ed994f
 			success : function(result){
 				showSuccMsg(sMsg,"입력하신 이메일에서 아이디를 확인해 주세요");
 				eMsg.hide();
@@ -60,6 +68,7 @@ $("#find-id-btn").click(function(){
 		});
 });
 
+<<<<<<< HEAD
 //일반 회원 비밀번호 찾기(String으로 값 받을때)
 $("#find-pw-btn").click(function(){
 	var mid = $("#mid").val();
@@ -122,3 +131,44 @@ $("#find-cpw-btn").click(function(){
         obj.html(msg);
         obj.show();
     }
+=======
+function sendEmail(){
+	$.ajax({
+		url:"/email/findid",
+		type:"post",
+		cache:false,
+		dataType:"json",
+		data:$("#email").serialize(),
+		async:false,
+		success:function(data){
+			alert(JSON.stringify(data));
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> bc6b3ca62ca2595374a8d0b751c7436558ed994f
