@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.exposition.entity.Company;
+import com.exposition.entity.Member;
 import com.exposition.repository.CompanyRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,7 @@ public class CompanyService implements UserDetailsService {
 		
 	}
 	
+<<<<<<< HEAD
 	//com으로 유저 찾기
 //		public Optional<Company> findByCom(Long id) {
 //			return companyRepository.findByCom(id);
@@ -88,5 +90,21 @@ public class CompanyService implements UserDetailsService {
 				throw new NullPointerException("가입된 회원이 아닙니다");
 			}
 		}
+=======
+	//아이디와 이메일로 기업 유저 찾기
+	public Company findByComAndEmail(String com, String email) {
+		Company company = companyRepository.findByComAndEmail(com, email);
+		if(company!=null) {
+			return company;
+		} else {
+			throw new NullPointerException("가입된 회원이 아닙니다");
+		}
+	}
+	
+	//기업 유저 회원 변경
+	public Company updateCompany(Company company) {
+		return companyRepository.save(company);
+	}
+>>>>>>> 5371799397205571a6fb266bcdae6220e9d0d0d6
 
 }

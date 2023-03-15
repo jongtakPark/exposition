@@ -4,7 +4,7 @@ xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
 layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>주변광광지</title>
+    <title>주변관광지</title>
 <link rel="stylesheet" th:href="@{/css/tourboard.css}">
 </head>
 
@@ -21,24 +21,22 @@ layout:decorate="~{layouts/layout}">
         <div class="title">
             <h1>주변관광지</h1>
         </div>
-					<th:block th:each="tourboard, status:${tourboard.getContent()}">
+					<th:block th:each="tourboard, status:${tourboards.getContent()}">
                         <div class="photo">
                             <div class="photo_pic">
 								<img th:src="${tourboard.savePath}">
                             </div>
                             <div class="photo_tit">
-                               <span th:text="${tourboard.title}"></span>   
+                               <a th:href="@{/news/view/{tourBoardId}(tourBoardId=${tourboard.id})}"><span th:text="${tourboard.title}"></span></a> 
                             </div>
-                            <div class="photo_con">
-                          <span th:text="${tourboard.content}"></span>  
-                            </div>
+
                         </div>
                      </th:block>
      </div>
      <div class="wrap">
             <div class="pagebtn">
-		 		<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-            		<a th:if="${page==0? page==1 : page != nowPage}" th:href="@{/news/tour(page=${page})}" th:text ="${page}"></a>
+		 	 <th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+            		<a th:if="${endPage==0? endPage==1 : page != nowPage}" th:href="@{/news/tour(page=${page-1})}" th:text ="${page}"></a>
             		<strong th:if="${page==nowPage}" th:text ="${page}" style="color:red"></strong>
         		</th:block>  
 			</div>

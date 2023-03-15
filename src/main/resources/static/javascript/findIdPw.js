@@ -49,6 +49,7 @@ $("#find-id-btn").click(function(){
 			beforeSend: function(xhr){
         		xhr.setRequestHeader(header, token);
     		},
+<<<<<<< HEAD
 =======
 	var sMsg = $("#sMsg")
 	var eMsg = $("#eMsg")
@@ -57,6 +58,9 @@ $("#find-id-btn").click(function(){
 			url: "/email/findid",
 			data : { "email" : email, "name" : name },
 >>>>>>> bc6b3ca62ca2595374a8d0b751c7436558ed994f
+=======
+
+>>>>>>> 5371799397205571a6fb266bcdae6220e9d0d0d6
 			success : function(result){
 				showSuccMsg(sMsg,"입력하신 이메일에서 아이디를 확인해 주세요");
 				eMsg.hide();
@@ -69,6 +73,11 @@ $("#find-id-btn").click(function(){
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 5371799397205571a6fb266bcdae6220e9d0d0d6
 //일반 회원 비밀번호 찾기(String으로 값 받을때)
 $("#find-pw-btn").click(function(){
 	var mid = $("#mid").val();
@@ -120,6 +129,34 @@ $("#find-cpw-btn").click(function(){
 });
 
 
+//기업 회원 비밀번호 찾기(String으로 값 받을때)
+$("#find-com-pw-btn").click(function(){
+	var com = $("#com1").val();
+	var email = $("#email").val();
+	var sMsg = $("#sMsg")
+	var eMsg = $("#eMsg")
+	var sendData = "com="+com+"&email="+email;
+	$.ajax({
+            type: "post",
+			url: "/signup/findcompw",
+			data : sendData,
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+    		},
+			success : function(result){
+				showSuccMsg(sMsg,"입력하신 이메일에서 임시 비밀번호를 확인해 주세요");
+				eMsg.hide();
+			},
+			error : function(){
+				showErrorMsg(eMsg,"이름 또는 이메일을 다시 확인해주세요.");
+				sMsg.hide();
+			}
+		});
+});
+
+
+
+
  function showErrorMsg(obj, msg) {
         obj.attr("class", "error");
         obj.html(msg);
@@ -131,6 +168,7 @@ $("#find-cpw-btn").click(function(){
         obj.html(msg);
         obj.show();
     }
+<<<<<<< HEAD
 =======
 function sendEmail(){
 	$.ajax({
@@ -172,3 +210,6 @@ function sendEmail(){
 
 
 >>>>>>> bc6b3ca62ca2595374a8d0b751c7436558ed994f
+=======
+
+>>>>>>> 5371799397205571a6fb266bcdae6220e9d0d0d6

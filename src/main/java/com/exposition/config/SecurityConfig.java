@@ -29,13 +29,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
+//		http.cors().and();
 //		http.csrf().disable(); 
 		http.formLogin().loginPage("/signup/login").defaultSuccessUrl("/")
 		.usernameParameter("mid")
 		.passwordParameter("password")
 		.failureUrl("/signup/login/error")
 		.and()
-		.logout().logoutUrl("signup/logout").logoutRequestMatcher(new AntPathRequestMatcher("/signup/logout")).logoutSuccessUrl("/");	
+		.logout().logoutUrl("signup/logout").logoutRequestMatcher(new AntPathRequestMatcher("/signup/logout")).logoutSuccessUrl("/");
+		
 //		.and()
 //		.authorizeRequests()
 //		.mvcMatchers("/","/member/**","/board/**","/introduction/**").permitAll() // 모든 사용자 인증없이 해당경로에 접근하도록 설정
@@ -64,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 	
 	@Override
-	public void configure(WebSecurity web) throws Exception {
+	public void configure(WebSecurity web) throws Exception {	
 	web.ignoring().antMatchers("/css/**", "/javascript/**", "/images/**","/video/**");
 	}
 	

@@ -40,10 +40,14 @@ public class MailController {
 		return map;	
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value="/findid", method= {RequestMethod.GET})
 	   public String findId(String email,String name, Member member) throws Exception {
 	      member = memberService.findByName(name);
 	      String findName = mailService.sendFindIdMail(email, member);
 	      return findName;
 	  }
+=======
+	
+>>>>>>> 5371799397205571a6fb266bcdae6220e9d0d0d6
 }

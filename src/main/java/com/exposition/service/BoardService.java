@@ -32,6 +32,7 @@ public class BoardService {
 	//게시판 상세보기 출력
 	public Optional<FreeBoard> findBoard(Long id) {
 		return boardRepository.findById(id);
+
 	}
 	//게시글 수정하기
 	public FreeBoard updateBoard(Long id) {

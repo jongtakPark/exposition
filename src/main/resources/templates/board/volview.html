@@ -12,19 +12,19 @@ layout:decorate="~{layouts/layout}">
 <div layout:fragment="content">
  <div class="subMenu">
        <ul>
-           <li><a href="#">전시관안내</a></li>
-           <li><a href="#">행사장오시는길</a></li>
-           <li><a href="#">포토갤러리</a></li>
-           <li><a href="#">여수섬키워드</a></li>
+           <li><a href="#">관람후기</a></li>
+           <li><a href="#">국민아이디어</a></li>
+           <li><a href="#">설문게시판</a></li>
+           <li><a href="#" sec:authorize="hasAnyAuthority('ROLE_VOLUNTEER')">자원봉사게시판</a></li>
        </ul>
    </div>
    <div class="freeboard">
        <div class="free_title">
           <div class="title">
-               <span>자유게시판 상세보기</span>
+               <span>자원봉사게시판 상세보기</span>
            </div>
        </div>
-       <form action="/board/boardview" method="get" >
+       <form action="/board/boardvview" method="get" >
        <div class="info_content">
             <div class="info_title">
                 <div class="info_title_inner">
@@ -50,14 +50,14 @@ layout:decorate="~{layouts/layout}">
                     <input type="text" th:value="${created}" readOnly >
                 </div>
             </div>
-               <a href="/board/modify">수정</a>
+            <div class="info_submit">
+               <button type="submit">등록</button>
+               <a href="/board/vmodify">수정</a>
+               <input type="hidden" name="_method" value="delete"/>
+               <a th:href="@{/board/delete/{id}(id=${session.id})}">삭제</a>
+            </div>
        </div>
        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-    </form>
-    <form th:action="@{/board/delete/{id}(id=${session.id})}" th:method="delete">
-    	<div class="info_submit">
-               <button type="submit" class="submit">삭제하기</button>
-         </div>
     </form>
    </div>
      

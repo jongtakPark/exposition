@@ -206,7 +206,11 @@ public class MemberController{
 	@PostMapping(value="/findid")
 	@ResponseBody
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public HashMap<String, Object> findID(@RequestParam("name") String name, @RequestParam("email") String email) throws MessagingException {
+=======
+	public HashMap<String, Object> findId(@RequestParam("name") String name, @RequestParam("email") String email) throws MessagingException {
+>>>>>>> 5371799397205571a6fb266bcdae6220e9d0d0d6
 		Member member = memberService.findByNameAndEmail(name, email);
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("result", mailService.sendFindIdMail(email, member));
@@ -247,6 +251,7 @@ public class MemberController{
 		memberService.updateMember(member);
 		return "success";
 	}
+<<<<<<< HEAD
 	
 	//기업 회원 비밀번호 찾기
 //	@PostMapping(value="/findcpw")
@@ -270,4 +275,20 @@ public class MemberController{
 		companyService.updateCompany(company);
 		return "success";
 	}
+=======
+	//기업 회원 비밀번호 찾기
+	@PostMapping(value="/findcompw")
+	@ResponseBody
+	public String findComPw(String com, String email) throws MessagingException, InterruptedException, ExecutionException {
+		Company company = companyService.findByComAndEmail(com, email);
+		String password =mailService.sendFindPwMail(email, company).get();
+		String pw= passwordEncoder.encode(password);
+		company.setPassword(pw);
+		companyService.updateCompany(company);
+		return "success";
+	}	
+
+	
+	
+>>>>>>> 5371799397205571a6fb266bcdae6220e9d0d0d6
 }
