@@ -21,11 +21,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exposition.dto.FreeBoardDto;
+<<<<<<< HEAD
 import com.exposition.dto.VolunteerDto;
 import com.exposition.entity.FreeBoard;
 import com.exposition.entity.Volunteer;
 import com.exposition.service.BoardService;
 import com.exposition.service.VolunteerService;
+=======
+import com.exposition.dto.IdeaDto;
+import com.exposition.entity.FreeBoard;
+import com.exposition.entity.Idea;
+import com.exposition.service.BoardService;
+import com.exposition.service.IdeaService;
+>>>>>>> 69805367f9cb6cab02fe8385d351d5c69a65dc1a
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,7 +42,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BoardController {
 	private final BoardService boardService;
+<<<<<<< HEAD
 	private final VolunteerService volunteerService;
+=======
+	private final IdeaService ideaService;
+>>>>>>> 69805367f9cb6cab02fe8385d351d5c69a65dc1a
 	
 	//설문조사게시판
 	@GetMapping(value="/survey")
@@ -59,8 +71,6 @@ public class BoardController {
 	        model.addAttribute("nowPage",nowPage);
 	        model.addAttribute("startPage", startPage);
 	        model.addAttribute("endPage", endPage);
-
-
 
 	        return "board/freeboard";
 	    }
@@ -123,6 +133,7 @@ public class BoardController {
 		return "redirect:/board/freeboard";
 	}
 	
+<<<<<<< HEAD
 	
 	//자원봉사게시판
 	@GetMapping(value="/volunteer")
@@ -186,4 +197,76 @@ public class BoardController {
 	
 	
 	
+=======
+	//국민아이디어게시판
+    @GetMapping(value="/idea")
+    public String ideaList(Model model, @PageableDefault(page=0, size=10, sort="id", direction=Sort.Direction.DESC) Pageable pageable){
+       
+       Page<Idea> list = ideaService.boardList(pageable);
+
+         model.addAttribute("idea",ideaService.boardList(pageable));
+
+         //페이징           
+         int nowPage = list.getPageable().getPageNumber() + 1;           
+         int startPage =  Math.max(nowPage - 4, 1);
+         int endPage = Math.min(nowPage+9, list.getTotalPages());
+
+         model.addAttribute("list", list);
+         model.addAttribute("nowPage",nowPage);
+         model.addAttribute("startPage", startPage);
+         model.addAttribute("endPage", endPage);
+
+         return "board/idea";
+     }
+    
+    // 국민아이디어 글쓰기 페이지로 이동
+    @GetMapping(value="/ideawrite")
+    public String ideawrite(Model model) {
+       model.addAttribute("ideaDto", new IdeaDto());
+       return "board/ideawrite";
+    }
+    
+    // 국민아이디어 글쓰기
+    @PostMapping(value="/ideanew")
+    public String ideawrite(IdeaDto ideaDto, Model model) {
+       Idea idea = Idea.createIdea(ideaDto);
+       ideaService.saveBoard(idea);
+       return "redirect:/board/idea";
+       }   
+    
+    // 국민아이디어 게시글 상세보기
+    @GetMapping(value="/ideaview/{id}")
+    public String ideaView(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+       Optional<Idea> view = ideaService.findBoard(id);
+       HttpSession session = request.getSession();
+       session.setAttribute("title", view.get().getTitle());
+       session.setAttribute("content", view.get().getContent());
+       session.setAttribute("id", view.get().getId());
+       model.addAttribute("title", view.get().getTitle());
+       model.addAttribute("content", view.get().getContent());
+       model.addAttribute("created", view.get().getCreatedBy());
+       model.addAttribute("session",session);
+       return "board/ideaview";
+    }
+    
+    //국민아이디어 게시글 수정창으로 이동
+    @GetMapping(value="/ideamodify")
+    public String ideamodifyView(Model model) {
+       model.addAttribute("ideaDto", new IdeaDto());
+       return "board/ideaupdatewrite";
+    }
+    
+    //국민아이디어 게시글 수정등록
+    @PutMapping(value="/ideamodcomplete/{id}")
+    public String ideamodComplete(@PathVariable("id") Long id, @RequestParam("title") String title, @RequestParam("content") String content, IdeaDto ideaDto, Model model) {
+       Idea idea = ideaService.updateBoard(id);
+       ideaDto.setTitle(title);
+       ideaDto.setContent(content);
+       ideaDto.setId(id);
+       idea = Idea.createIdea(ideaDto);
+       ideaService.saveBoard(idea);
+       // model.addAttribute("freeboard",boardService.boardList()));
+       return "redirect:/board/idea";
+    }
+>>>>>>> 69805367f9cb6cab02fe8385d351d5c69a65dc1a
 }
