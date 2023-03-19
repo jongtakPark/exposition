@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>여수 세계 섬 박람회</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="fullPage full-screen navigation and sections control menu." />
+	<meta name="keywords" content="fullpage,jquery,demo,screen,fullscreen,navigation,control arrows, dots" />
+	<meta name="Resource-type" content="Document" />
+
+
+	<link rel="stylesheet" type="text/css" href="/css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="/css/examples.css" />
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/mainMenu.css">
+	<link rel="stylesheet" href="/css/swiper.css">
+
+
+
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+	<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+	<link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
+	<link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+	<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+	<meta name="theme-color" content="#712cf9">
+	<style>
+
+	</style>
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="/javascript/scrolloverflow.js"></script>
+
+	<script type="text/javascript" src="/javascript/jquery.fullPage.js"></script>
+	<script type="text/javascript" src="/javascript/examples.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#fullpage').fullpage({
+				anchors: ['firstPage', 'secondPage', 'thirdPage', 'footer'],
+				navigation: true,
+				navigationPosition: 'right',
+				// navigationTooltips: ['First page', 'Second page', 'Third and last page'],
+				responsiveWidth: 900,
+				afterResponsive: function (isResponsive) {
+
+				}
+
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+	<header class="header">
+		<div class="main_logo">
+			<a href="#"><img src="images/KakaoTalk_20230223_170052168.png" alt=""></a>
+		</div>
+		<div class="main_sns">
+			<ul>
+				<li><a href="#"><img src="images/facebook.png" alt=""></a></li>
+				<li><a href="#"><img src="images/instagram.png" alt=""></a></li>
+				<li><a href="#"><img src="images/youtube.png" alt=""></a></li>
+			</ul>
+		</div>
+		<div sec:authorize="hasAnyAuthority('ROLE_ADMIN')" class="welcome">
+         	<span sec:authentication="name" class="welcome2"></span>&nbsp;님 환영합니다
+        </div>      
+        <div sec:authorize="hasAnyAuthority('ROLE_USER')" class="welcome">
+            <span sec:authentication="name" class="welcome2"></span>&nbsp;님 환영합니다
+        </div>
+        <div sec:authorize="hasAnyAuthority('ROLE_COMPANY')" class="welcome">
+         	<span sec:authentication="name" class="welcome2"></span>&nbsp;님 환영합니다
+      	</div>
+      	<div sec:authorize="hasAnyAuthority('ROLE_VOLUNTEER')" class="welcome">
+        	 <span sec:authentication="name" class="welcome2"></span>&nbsp;님 환영합니다
+     	 </div>
+		<div class="main_lang">
+			<select name="lang" id="lang">
+				<option value="">
+					KOR
+				</option>
+				<option value="">
+					ENG
+				</option>
+				<option value="">
+					CHI
+				</option>
+				<option value="">
+					JAP
+				</option>
+			</select>
+		</div>
+		<div class="main_menu">
+			<!-- <div class="main_menu_inner">
+				
+			</div> -->
+
+		</div>
+		<input type="checkbox" id="menu">
+		<label for="menu" class="label">
+			<span></span>
+       	 	<span></span>
+        	<span></span>
+		</label>
+		<div class="sidebar">
+			<div class="container">
+
+        <div class="login" sec:authorize="isAnonymous()">
+            <span><a href="/signup/login">로그인</a></span>
+        </div>
+		<div class="logout" sec:authorize="isAuthenticated()">
+            <span><a href="/signup/logout">로그아웃</a></span>
+        </div>
+
+        <div class="logo">
+            <img src="/images/logo.png">
+        </div>
+
+        <div class="memberMenu" sec:authorize="isAnonymous() || hasAnyAuthority('ROLE_USER') || hasAnyAuthority('ROLE_VOLUNTEER')">
+            <div><a class="memberSubMenu" href="#">박람회소개
+                <div><a href="/menu/exhibition">전시관안내</a></div>
+                <div><a href="/menu/directions">행사장오시는길</a></div>
+                <div><a href="#">여수섬키워드</a></div>
+                </a></div>
+            <div><a class="memberSubMenu" href="#">알림마당
+                <div><a href="/news/tour">주변관광지</a></div>
+                <div><a href="#">공지사항</a></div>
+                <div><a href="#">보도자료</a></div>
+                <div><a href="/news/event">이벤트게시판</a></div>
+                </a></div>
+                <div><a href="#">참가업체목록</a></div>
+            <div><a class="memberSubMenu" href="/board/freeboard">자유게시판
+                <div><a href="#">관람후기</a></div>
+                <div><a href="/board/idea">국민아이디어</a></div>
+                <div><a href="board/survey">설문게시판</a></div>
+                <div sec:authorize="hasAnyAuthority('ROLE_VOLUNTEER')"><a href="#">자원봉사게시판</a></div>
+                </a></div>
+        </div>
+
+
+        <div class="adminMenu" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+           <div><a class="adminSubMenu" href="#">박람회소개
+               <div><a href="/menu/exhibition">전시관안내</a></div>
+               <div><a href="/menu/directions">행사장오시는길</a></div>
+               <div><a href="#">여수섬키워드</a></div>
+           </a></div>
+           <div><a class="adminSubMenu" href="#">알림마당
+               <div><a href="/news/tour">주변관광지</a></div>
+               <div><a href="#">공지사항</a></div>
+               <div><a href="#">보도자료</a></div>
+               <div><a href="/news/event">이벤트게시판</a></div>
+           </a></div>
+           <div><a href="#">참가업체목록</a></div>
+           <div><a class="adminSubMenu" href="/board/freeboard">자유게시판
+               <div><a href="#">관람후기</a></div>
+               <div><a href="/board/idea">국민아이디어</a></div>
+               <div><a href="board/survey">설문게시판</a></div>
+               <div><a href="#">자원봉사게시판</a></div>
+           </a></div>
+           <div><a class="adminSubMenu2" href="#">업체등록</a></div>
+           <div><a class="adminSubMenu" href="#">관리자게시판
+               <div><a href="/admin/comConsent">승인현황</a></div>
+               <div><a href="/admin/memManagement">회원관리</a></div>
+           </a></div>
+        </div> 
+
+         <div class="companyMenu" sec:authorize="hasAnyAuthority('ROLE_COMPANY')">
+           <div><a class="companySubMenu" href="#">박람회소개
+               <div><a href="/menu/exhibition">전시관안내</a></div>
+               <div><a href="/menu/directions">행사장오시는길</a></div>
+               <div><a href="#">여수섬키워드</a></div>
+           </a></div>
+           <div><a class="companySubMenu" href="#">알림마당
+               <div><a href="/news/tour">주변관광지</a></div>
+               <div><a href="#">공지사항</a></div>
+               <div><a href="#">보도자료</a></div>
+               <div><a href="/news/event">이벤트게시판</a></div>
+           </a></div>
+           <div><a href="#">참가업체목록</a></div>
+           <div><a class="companySubMenu" href="#">자유게시판
+               <div><a href="board/reviewshow">관람후기</a></div>
+               <div><a href="board/idea">국민아이디어</a></div>
+               <div><a href="board/survey">설문게시판</a></div>
+               <div><a href="board/volunteer">자원봉사게시판</a></div>
+
+               <div sec:authorize="hasAnyAuthority('ROLE_VOLUNTEER')"><a href="#">자원봉사게시판</a></div>
+
+           </a></div>
+           <div><a class="companySubMenu2" href="#">업체등록</a></div>
+        </div> 
+       <div class="footer">
+           <p>문 의 처 : 여수시 섬자원개발과</p>
+           <p>전 화 번 호 : 061-659-3959(장원석)</p>
+           <p>이 메 일 : withwsj@korea.kr</p>
+       </div>
+    </div>
+		</div>
+	</header>
+
+	<div id="fullpage">
+
+		<div class="section " id="section0">
+			<div class="intro video">
+				<video data-autoplay muted>
+					<source th:src="@{/video/yeosu.mp4}">
+				</video>
+			</div>
+		</div>
+		<div class="section" id="section1">
+			<div class="intro">
+				<div class="section1_inner">
+					<h2>대한민국 세계 섬 박람회</h2>
+					<h1>2026년 여수에서 개최합니다.</h1>
+				</div>
+				<div class="section1_content">
+					<img src="images/main4.jpg" alt="">
+					<div class="cont1">
+						<ul>
+							<li><span>기간</span> <strong>ㅣ</strong> 2026. 7. 17 &nbsp;~ &nbsp;2026. 8. 16</li>
+							<li><span>장소</span> <strong>ㅣ</strong> 여수시 돌산 진모지구 및 도서 일원</li>
+							<li><span>주제</span> <strong>ㅣ</strong> 섬, 바다와 미래를 잇다</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="section" id="section2">
+			<div class="intro">
+				<div class="section2_inner">
+				</div>
+				<div class="swiper mySwiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"><img src="images/1.jpg" alt="">
+							<div class="t1"><p>2026여수세계섬박람회’
+								성공개최 기원기</p><a
+									href="https://www.yeosu.go.kr/www/govt/news/release/press?mode=view&idx=480797"
+									class="btn1">더보기</a></div>
+						</div>
+						<div class="swiper-slide"><img src="images/2.jpg" alt="">
+							<div class="t1"><p>여수시, 2026여수세계섬박람회 기본구상 발표</p><a
+									href="https://www.yeosu.go.kr/www/govt/news/hotnews?mode=view&idx=175280" class="btn1">더보기
+									</a></div>
+						</div>
+						<div class="swiper-slide"><img src="images/3.jpg" alt="">
+							<div class="t1"><p>‘2026여수세계섬박람회’ 국제행사 승인 기념 성공개최 결의대회 진행</p><a
+									href="https://www.yeosu.go.kr/www/govt/news/release/press?mode=view&idx=481303" class="btn2">더보기
+									</a></div>
+						</div>
+						<div class="swiper-slide"><img src="images/4.jpg" alt="">
+							<div class="t1"><p>세계섬박람회 본격준비...22일 용역 착수 시작</p><a
+									href="https://www.yeosu.go.kr/www/govt/news/release/press?mode=view&idx=173770" class="btn1">더보기</a></div>
+						</div>
+						<div class="swiper-slide"><img src="images/5.jpg" alt="">
+							<div class="t1"><p>‘국제 섬 포럼 여수’ 25일 개막…‘섬 박람회 기틀 마련’</p><a
+									href="https://www.yeosu.go.kr/www/govt/news/release/press?mode=view&idx=174170" class="btn1">더보기</a></div>
+						</div>
+						<div class="swiper-slide"><img src="images/6.jpg" alt="">
+							<div class="t1"><p>여수시, 2026여수세계섬박람회 범시민준비위원회 위원 모집 시작</p><a
+									href="https://www.yeosu.go.kr/www/govt/news/hotnews?mode=view&idx=485741" class="btn2">더보기</a></div>
+						</div>
+					</div>
+
+				</div>
+				<div class="swiper_btn">
+					<h2>박람회 소식</h2>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+				</div>
+			</div>
+		</div>
+		<div class="section footer-wrap fp-auto-height">
+			<div class="footer">
+				<div class="footer_inner">
+					<div class="footer_left">
+						<img src="images/footer.png" alt="">
+					</div>
+					<div class="footer_middle">
+						<div class="footer_middle_content">
+							<p>주소 59723 전라남도 여수시 박람회길 1 (덕충동) 사업자번호 417-82-08394<br>
+								TEL 1577-2012 FAX 061-659-2029
+							</p>
+							<p>
+								Copyright © EXPO 2026 YEOSU KOREA FOUNDATION All rights reserved.
+							</p>
+						</div>
+					</div>
+					<div class="footer_right">
+						<select name="familysite" id="familysite">
+							<option value="">
+								여수세계섬박람회
+							</option>
+							<option value="">
+								site2
+							</option>
+							<option value="">
+								site3
+							</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+	<script>
+		var swiper = new Swiper(".mySwiper", {
+			slidesPerView: 3,
+			spaceBetween: 30,
+			loop: true,
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+
+		});
+	</script>
+</body>
+
+</html>

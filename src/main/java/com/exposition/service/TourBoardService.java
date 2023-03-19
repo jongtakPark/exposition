@@ -12,10 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.exposition.dto.BoardMainDto;
+import com.exposition.dto.EventMemberDto;
 import com.exposition.dto.FileDto;
 import com.exposition.dto.TourBoardDto;
+import com.exposition.entity.EventBoard;
 import com.exposition.entity.Files;
 import com.exposition.entity.TourBoard;
+import com.exposition.repository.BoardRepository;
+import com.exposition.repository.EventBoardRepository;
 import com.exposition.repository.FileRepository;
 import com.exposition.repository.TourBoardRepository;
 
@@ -29,7 +33,6 @@ public class TourBoardService {
 	private final TourBoardRepository tourBoardRepository;
 	private final FileService fileService;
 	private final FileRepository fileRepository;
-
 
 	//주변 관광지 게시판 리스트 출력(페이징)
 	public Page<BoardMainDto> getBoardMainPage(TourBoardDto tourBoardDto, Pageable pageable){
@@ -96,7 +99,6 @@ public class TourBoardService {
 			for(int i=0; i<list.size(); i++) {
 				fileService.deleteFile(list.get(i).getId());
 				fileService.deleteComFile("C:/images/" + list.get(i).getImg());
-				System.out.println("언제 실행되나요~");
 			}
 		}
 		tourBoardRepository.deleteById(id);
@@ -110,7 +112,6 @@ public class TourBoardService {
 			for(int i=0; i<list.size(); i++) {
 				fileService.deleteFile(list.get(i).getId());
 				fileService.deleteComFile("C:/images/" + list.get(i).getImg());
-				System.out.println("언제 실행되나요~");
 			}
 		}
 	}
@@ -119,6 +120,5 @@ public class TourBoardService {
 	public TourBoard findById(Long id){
 		return tourBoardRepository.findById(id).get();
 	}
-		
 	
 }

@@ -6,12 +6,17 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
+import org.modelmapper.ModelMapper;
 
+import com.exposition.entity.EventBoard;
 import com.exposition.entity.Member;
+import com.querydsl.core.annotations.QueryProjection;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class MemberFormDto {
 	
 	@NotBlank(message = "아이디는 필수 입력 값입니다.")
@@ -43,6 +48,19 @@ public class MemberFormDto {
 		memDto.password = mem.getPassword();
 		memDto.tel = mem.getTel();
 		return memDto;
+	}
+    
+    @QueryProjection
+    public MemberFormDto(String mid, String name, String email) {
+    	this.mid = mid;
+    	this.name = name;
+    	this.email = email;
+    }
+    
+    private static ModelMapper modelMapper = new ModelMapper();
+	
+	public static MemberFormDto of(Member member) {
+		return modelMapper.map(member, MemberFormDto.class);
 	}
 
 }

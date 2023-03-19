@@ -2,8 +2,11 @@ package com.exposition.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -22,8 +25,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.exposition.dto.BoardMainDto;
+import com.exposition.dto.EventBoardDto;
+import com.exposition.dto.EventMemberDto;
 import com.exposition.dto.TourBoardDto;
+import com.exposition.entity.EventBoard;
+import com.exposition.entity.Member;
+import com.exposition.entity.QMember;
+import com.exposition.service.EventBoardService;
 import com.exposition.service.FileService;
+import com.exposition.service.MailService;
+import com.exposition.service.MemberService;
 import com.exposition.service.TourBoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -35,6 +46,9 @@ public class NewsBoardController {
 
 	private final FileService fileService;
 	private final TourBoardService tourBoardService;
+	private final EventBoardService eventBoardService;
+	private final MemberService memberService;
+	private final MailService mailService;
 	
 	//주변관광지 페이지 이동
 	@RequestMapping(value="/tour", method= {RequestMethod.GET, RequestMethod.POST})
@@ -130,4 +144,52 @@ public class NewsBoardController {
 		tourBoardService.deleteBoard(id);
 		return "redirect:/news/tour";
 	}
+	
+	//이벤트 게시판 이동
+	@GetMapping(value="/event")
+	public String eventBoard(Model model) {
+		model.addAttribute("eventBoardList", eventBoardService.findAll());
+		return "news/eventboard";
+	}
+	//이벤트 게시판 글쓰기 창으로 이동
+	@GetMapping(value="/eventboardwrite")
+	public String eventBoardWrite(Model model) {
+		model.addAttribute("eventBoardDto", new EventBoardDto());
+		return "news/eventboardwrite";
+	}
+	//이벤트 게시판 글 등록과 동시에 이벤트 당첨자 회원을 3명 뽑음
+	@PostMapping(value="/new")
+	public String eventBoardNew(EventBoardDto eventBoardDto, Model model) throws Exception {
+		Random rnd = new Random();
+		EventBoard eventBoard = eventBoardDto.createEventBoard();
+		for(int i=0; i<3; i++) {
+			List<EventMemberDto> mem = eventBoardService.saveBoardAndSelectMember(eventBoard);
+			if(mem.size()<1) {
+				model.addAttribute("errorMessage", "이벤트 당첨 조건에 맞는 회원이 없습니다.");
+				return "news/eventboardwrite";
+			} else {
+				int j = rnd.nextInt(mem.size());
+				Member member = Member.EventMember(mem.get(j));
+				Member m = memberService.findById(member.getId()).get();
+				mailService.eventSendhMail(m.getEmail(), m.getName());
+				m.setEventCount("Y");
+				m.setEventBoardId(eventBoard.getId());
+				memberService.updateMember(m);
+			}
+		}
+		return "redirect:/news/event";
+	}
+
+	//이벤트 게시판 상세창으로 이동
+	@GetMapping(value="/eventboardview/{id}")
+	public String eventBoardView(@PathVariable("id") Long id, Model model) {
+		EventBoard eventBoard = eventBoardService.findById(id);
+		List<Member> member = memberService.findByEventBoardId(id);
+		EventBoardDto eventBoardDto = EventBoardDto.of(eventBoard);
+		model.addAttribute("eventBoardDto", eventBoardDto);
+		model.addAttribute("member", member);
+		return "/news/eventboardview";
+	}
+
+	
 }

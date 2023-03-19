@@ -1,5 +1,7 @@
 package com.exposition.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,8 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exposition.dto.CompanyFormDto;
 import com.exposition.entity.Company;
-import com.exposition.entity.Member;
 import com.exposition.repository.CompanyRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,15 @@ public class CompanyService implements UserDetailsService {
 		if(findCompany != null) {
 			throw new IllegalStateException("이미 가입된 회원입니다");
 		}	
+	}
+	
+	//기업회원 전체 조회
+	public Page<Company> findAllComapny(Pageable pageable){
+		return companyRepository.findAll(pageable);
+	}
+	
+	public Company findByCom(String com) {
+		return companyRepository.findByCom(com);
 	}
 	//ajax를 이용한 중복검사
 	public boolean checkComDuplicate(String com) {
@@ -62,6 +73,16 @@ public class CompanyService implements UserDetailsService {
 	//기업 유저 회원 변경
 	public Company updateCompany(Company company) {
 		return companyRepository.save(company);
+	}
+	
+	//업체 등록 신청을 한 기업 찾기
+	public Page<CompanyFormDto> findApprovalCom(CompanyFormDto companyFormDto, Pageable pageable){
+		return companyRepository.getApprovalCom(companyFormDto,  pageable);
+	}
+	
+	//업체등록 신청한 기업 승인
+	public void updateApp(String com) {
+		companyRepository.updateApp(com);
 	}
 
 }

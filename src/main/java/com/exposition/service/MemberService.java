@@ -1,7 +1,10 @@
 package com.exposition.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -34,6 +37,11 @@ public class MemberService implements UserDetailsService {
 			throw new IllegalStateException("이미 가입된 회원입니다");
 		}	
 	}
+	
+	//회원 전체 조회
+	public Page<Member> findAllMember(Pageable pageable){
+		return memberRepository.findAll(pageable);
+	}
 
 	//ajax를 이용한 중복검사
 	public boolean checkMidDuplicate(String mid) {
@@ -51,7 +59,7 @@ public class MemberService implements UserDetailsService {
 		return User.builder().username(member.getMid()).password(member.getPassword()).roles(member.getRole().toString()).build();
 	}
 	
-	//id로 유저 찾기
+	//id로 유저 조회
 	public Optional<Member> findById(Long id) {
 		return memberRepository.findById(id);
 	}
@@ -60,27 +68,8 @@ public class MemberService implements UserDetailsService {
 	public Member updateMember(Member member) {
 		return memberRepository.save(member);
 	}
-	
 
-	// MemberDto -> Member 변환
-//		private Member change(Member ori, MemberFormDto dto) {
-//			System.out.println(dto);
-//			ori.setName(dto.getName());
-//			ori.setEmail(dto.getEmail());
-//			if (!dto.getPassword().isEmpty())
-//				ori.setPassword(dto.getPassword());
-//			return ori;
-//		}
-		
-		// Email 체크
-		// public MemberFormDto findByEmail(String email) {
-		// 	Member mem = memberRepository.findByEmail(email);
-		// 	if (mem != null)
-		// 		return MemberFormDto.createMemberDto(mem);
-		// 	return null;
-		// }
-
-	//이름과 이메일로으로 유저 찾기
+	//이름과 이메일로으로 유저 조회
 	public Member findByNameAndEmail(String name, String email) {
 		Member member = memberRepository.findByNameAndEmail(name, email);
 		if(member!=null) {
@@ -90,7 +79,7 @@ public class MemberService implements UserDetailsService {
 		}
 	}
 	
-	//아이디와 이메일로 유저 찾기
+	//아이디와 이메일로 유저 조회
 	public Member findByMidAndEmail(String mid, String email) {
 		Member member = memberRepository.findByMidAndEmail(mid, email);
 		if(member!=null) {
@@ -100,7 +89,7 @@ public class MemberService implements UserDetailsService {
 		}
 	}
 	
-	//아이디로 회원 찾기
+	//아이디로 회원 조회
 	public Member findByMid(String mid) {
 		Member member = memberRepository.findByMid(mid);
 		if(member!=null) {
@@ -110,4 +99,33 @@ public class MemberService implements UserDetailsService {
 		}
 	}
 	
+	//이벤트 당첨자 조회
+	public List<Member> findByEventBoardId(Long id) {
+		List<Member> member = memberRepository.findByEventBoardId(id);
+		if(member!=null) {
+			return member;
+		} else {
+			throw new NullPointerException("이벤트에 당첨된 회원이 없습니다.");
+		}
+	}
+	
+	// 자원봉사 신청한 회원 조회
+	public Page<MemberFormDto> findByAppVolunteer(MemberFormDto memberFormDto, Pageable pageable){
+		return memberRepository.getAppVolunteer(memberFormDto, pageable);
+	}
+	
+	//일반회원을 자원봉사 회원으로 변경
+	public void updateMemToVol(MemberFormDto memberFormDto) {
+		memberRepository.updateMemToVol(memberFormDto);
+	}
+	
+	//일반회원을 자원봉사 회원으로 모두 변경
+	public void updateAllMemToAll() {
+		memberRepository.updateAllMemToVol();
+	}
+	
+	//일반회원 탈퇴
+	public void deleteMem(Member member) {
+		memberRepository.delete(member);
+	}
 }

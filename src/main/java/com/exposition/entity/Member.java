@@ -11,13 +11,18 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.exposition.constant.Role;
+import com.exposition.dto.EventMemberDto;
 import com.exposition.dto.MemberFormDto;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
@@ -28,6 +33,7 @@ import lombok.ToString;
 @Table(name="member")
 @Data
 @ToString
+@DynamicInsert
 public class Member {
 	
 	@Id
@@ -55,10 +61,17 @@ public class Member {
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	
+	@ColumnDefault("'Y'")
+	private String survey;  //설문조사 참여 Y/N
+	
+	@ColumnDefault("'N'")
+	private String eventCount;  //이벤트 당첨 Y/N
+	
+	@ColumnDefault("'W'")
+	private String approval; //자원봉사 봉사 지원 신청 Y/W/N
 
-//	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-//	@ToString.Exclude
-//	private List<FreeBoard> freeBoardList = new ArrayList<>();
+	private Long eventBoardId;
 	
 	//스프링시큐리티 설정 클래스에(SecurityConfig.java) 등록한 BCryptPasswordEncoder Bean으로 파라미터로 넘겨서 비밀번호를 암호화
 	public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
@@ -66,13 +79,19 @@ public class Member {
 		member.setMid(memberFormDto.getMid());
 		member.setName(memberFormDto.getName());
 		String password = passwordEncoder.encode(memberFormDto.getPassword());
-		
 		member.setPassword(password);
-//		String comfirmPw = passwordEncoder.encode(memberFormDto.getConfirmPassword());
-//		member.setConfirmPassword(comfirmPw);
 		member.setEmail(memberFormDto.getEmail());
 		member.setTel(memberFormDto.getTel());
 		member.setRole(Role.ADMIN);
+		return member;
+	}
+	
+	public static Member EventMember(EventMemberDto eventMemberDto) {
+		Member member = new Member();
+		member.setId(eventMemberDto.getId());
+		member.setMid(eventMemberDto.getMid());
+		member.setEmail(eventMemberDto.getEmail());
+		member.setEventCount(eventMemberDto.getEventCount());
 		return member;
 	}
 }

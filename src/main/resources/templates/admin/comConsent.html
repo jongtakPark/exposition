@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+		layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>AdminMenu</title>
+<link rel="stylesheet" th:href="@{/css/consent.css}">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="subMenu">
+        <ul>
+           <li><a href="#">기업 승인관리</a></li>
+           <li><a href="/admin/memConsent">자원 봉사자 승인관리</a></li>
+           <li><a href="/admin/memManagement">회원관리</a></li>
+           <li><a href="/admin/comManagement">기업관리</a></li>
+       </ul>
+   </div>
+   <div class="container">
+   	   <div class="container2" id="cont2">
+       <div class="title">
+           <h1>기업 승인관리</h1>
+       </div>
+       <div class="approval_content">
+       <table width="100%">
+           <thead>
+               <tr>
+               	   <td>번호</td>
+                   <td>신청한 기업</td>
+                   <td>이메일</td>
+                   <td>신청한 장소</td>
+                   <td>신청날짜</td>
+                   <td>승인</td>
+               </tr>
+           </thead>
+           <tbody>
+               <tr th:each="list : ${appCom}">
+               	   <td></td>
+                   <td th:text="${list.com}"></td>
+                   <td th:text="${list.email}"></td>
+                   <td></td>
+                   <td>[[${#temporals.format(list.startDay, 'yyyy-MM-dd')}]]~[[${#temporals.format(list.finishDay, 'yyyy-MM-dd')}]]</td>
+                   <td><form th:action="@{/admin/conCom/{com}(com=${list.com})}" th:method="put"><input type="submit" class="recognize" value="승인">
+                   <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                   </form></td>
+               </tr>
+           </tbody>
+       </table>
+       </div>
+       <form th:action="@{/admin/conComAll}" th:method="put" >
+       		<input type="submit" value="모두승인" class="conAll">
+       		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+       </form>
+       <div class="wrap">
+         <div class="pagebtn">
+		 	 <th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+            		<a th:if="${endPage==0? endPage==1 : page != nowPage}" th:href="@{/admin/consent(page=${page-1})}" th:text ="${page}"></a>
+            		<strong th:if="${page==nowPage}" th:text ="${page}" style="color:red"></strong>
+        	</th:block>  
+		</div>
+		</div>
+       </div>
+   </div>
+</div>
+</body>
+</html>
