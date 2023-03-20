@@ -12,4 +12,9 @@ public class LeaseController {
 	public String Lease() {
 		return "lease/lease";
 	}
+	
+	@GetMapping(value="/calendar")
+	   public String caldendar() {
+	      return "lease/calendar";
+	   }
 }

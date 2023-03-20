@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar</title>
+<link rel="stylesheet" th:href="@{/css/calendar.css}">
+<script type="text/javascript" src="/javascript/index.global.js"></script>
+<script type="text/javascript" src="/javascript/calendar.js"></script>
+</head>
+<body>  
+
+<div layout:fragment="content">    
+<div id='calendar-container'>
+    <div id='calendar'></div>
+  </div>
+  <h1>예약하기</h1>
+   <div class="main_reservation">
+            <div class="com_a">
+                <div class="com_id"><span>기업명</span></div>
+                <div><input class="com_tex" type="text" placeholder=" 기업명"></div>
+            </div>
+            <div class="com_b">
+                <div class="com_file">
+                    <span>첨부파일</span>
+                </div>
+                <div>
+                    <input class="com_tex" type="text" placeholder=" 파일첨부">
+                </div>
+                <div class="com_file_ck">
+                    <input  value="첨부" type="button">
+                </div>
+            </div>
+            <div class="com_c">
+                <div class="com_con"><span>상세내용</span></div>
+                <div><input class="com_tex2" type="text" placeholder=" 상세설명"></div>
+            </div>
+            <input class="regist" type="button" value="예약">                      
+        </div>
+</div>
+</body>
+</html>
