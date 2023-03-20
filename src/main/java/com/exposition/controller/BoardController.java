@@ -23,22 +23,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exposition.dto.FreeBoardDto;
-<<<<<<< HEAD
-import com.exposition.dto.VolunteerDto;
-import com.exposition.entity.FreeBoard;
-import com.exposition.entity.Volunteer;
-import com.exposition.service.BoardService;
-import com.exposition.service.VolunteerService;
-=======
 import com.exposition.dto.IdeaDto;
+import com.exposition.dto.VolunteerDto;
 import com.exposition.entity.FreeBoard;
 import com.exposition.entity.Idea;
 import com.exposition.entity.Member;
 import com.exposition.entity.Survey;
+import com.exposition.entity.Volunteer;
 import com.exposition.service.BoardService;
 import com.exposition.service.IdeaService;
 import com.exposition.service.MemberService;
->>>>>>> 6e8a0955bfe22b27ad4fff1cf61d49dd9df91749
+import com.exposition.service.VolunteerService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,18 +42,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BoardController {
 	private final BoardService boardService;
-<<<<<<< HEAD
 	private final VolunteerService volunteerService;
-	
-	//설문조사게시판
-	@GetMapping(value="/survey")
-	public String survey() {
-		return "board/survey";
-	}
-=======
 	private final IdeaService ideaService;
 	private final MemberService memberService;
->>>>>>> 6e8a0955bfe22b27ad4fff1cf61d49dd9df91749
 	
 	//자유게시판
 	@GetMapping(value="/freeboard")
@@ -140,7 +126,6 @@ public class BoardController {
 		return "redirect:/board/freeboard";
 	}
 	
-<<<<<<< HEAD
 	
 	//자원봉사게시판
 	@GetMapping(value="/volunteer")
@@ -204,7 +189,6 @@ public class BoardController {
 	
 	
 	
-=======
 	//국민아이디어게시판
     @GetMapping(value="/idea")
     public String ideaList(Model model, @PageableDefault(page=0, size=10, sort="id", direction=Sort.Direction.DESC) Pageable pageable){
@@ -335,5 +319,4 @@ public class BoardController {
   		memberService.updateMember(member);
   		return "redirect:/board/survey";
   	}
->>>>>>> 6e8a0955bfe22b27ad4fff1cf61d49dd9df91749
 }

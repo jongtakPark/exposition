@@ -73,6 +73,7 @@
 				<li><a href="#"><img src="images/instagram.png" alt=""></a></li>
 				<li><a href="#"><img src="images/youtube.png" alt=""></a></li>
 			</ul>
+			
 		</div>
 		<div sec:authorize="hasAnyAuthority('ROLE_ADMIN')" class="welcome">
          	<span sec:authentication="name" class="welcome2"></span>&nbsp;님 환영합니다
@@ -136,7 +137,7 @@
                 </a></div>
             <div><a class="memberSubMenu" href="#">알림마당
                 <div><a href="/news/tour">주변관광지</a></div>
-                <div><a href="#">공지사항</a></div>
+                <div><a href="/ment/announcement">공지사항</a></div>
                 <div><a href="#">보도자료</a></div>
                 <div><a href="/news/event">이벤트게시판</a></div>
                 </a></div>
@@ -145,7 +146,7 @@
                 <div><a href="#">관람후기</a></div>
                 <div><a href="/board/idea">국민아이디어</a></div>
                 <div><a href="board/survey">설문게시판</a></div>
-                <div sec:authorize="hasAnyAuthority('ROLE_VOLUNTEER')"><a href="#">자원봉사게시판</a></div>
+                <div sec:authorize="hasAnyAuthority('ROLE_VOLUNTEER')"><a href="/board/volunteer">자원봉사게시판</a></div>
                 </a></div>
         </div>
 
@@ -158,7 +159,7 @@
            </a></div>
            <div><a class="adminSubMenu" href="#">알림마당
                <div><a href="/news/tour">주변관광지</a></div>
-               <div><a href="#">공지사항</a></div>
+               <div><a href="/ment/announcement">공지사항</a></div>
                <div><a href="#">보도자료</a></div>
                <div><a href="/news/event">이벤트게시판</a></div>
            </a></div>
@@ -167,7 +168,7 @@
                <div><a href="#">관람후기</a></div>
                <div><a href="/board/idea">국민아이디어</a></div>
                <div><a href="board/survey">설문게시판</a></div>
-               <div><a href="#">자원봉사게시판</a></div>
+               <div><a href="board/volunteer">자원봉사게시판</a></div>
            </a></div>
            <div><a class="adminSubMenu2" href="#">업체등록</a></div>
            <div><a class="adminSubMenu" href="#">관리자게시판
@@ -184,7 +185,7 @@
            </a></div>
            <div><a class="companySubMenu" href="#">알림마당
                <div><a href="/news/tour">주변관광지</a></div>
-               <div><a href="#">공지사항</a></div>
+               <div><a href="/ment/announcement">공지사항</a></div>
                <div><a href="#">보도자료</a></div>
                <div><a href="/news/event">이벤트게시판</a></div>
            </a></div>
