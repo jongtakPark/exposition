@@ -4,14 +4,13 @@
     var calendar = new FullCalendar.Calendar(calendarEl, {
 
       height: '800px',
-      expandRows: true,
-      slotMinTime: '08:00',
-      slotMaxTime: '20:00',
+      expandRows: true,    
       headerToolbar: {
         center: 'title',
       },
       locale: "ko",
-      initialView: 'dayGridMonth',
+      initialView: 'dayGridYear',
+      initialDate: '2026-07-01',
       editable: true,
       selectable: true,
       nowIndicator: true,
