@@ -319,4 +319,6 @@ public class BoardController {
   		memberService.updateMember(member);
   		return "redirect:/board/survey";
   	}
+  	
+  	
 }
