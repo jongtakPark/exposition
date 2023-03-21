@@ -1473,7 +1473,10 @@ var FullCalendar = (function (exports) {
         initialView: '',
         aspectRatio: 1.35,
         headerToolbar: {
+<<<<<<< HEAD
             // start: 'title',
+=======
+>>>>>>> origin/main
             center: '',
             end: 'today prev,next',
         },
@@ -14584,4 +14587,9 @@ var FullCalendar = (function (exports) {
 
     return exports;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/main
 })({});

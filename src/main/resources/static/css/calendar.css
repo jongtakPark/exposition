@@ -3,7 +3,11 @@
   text-decoration: none;
 }
 
+<<<<<<< HEAD
 /* í† ìš”ì¼ ë‚ ì§œ íŒŒëž€ìƒ‰ */
+=======
+/* Åä¿äÀÏ ³¯Â¥ ÆÄ¶õ»ö */
+>>>>>>> origin/main
 .fc-day-sat a {
   color: blue;
   text-decoration: none;
@@ -12,7 +16,10 @@
 #calendar{
     margin: auto;
     width: 70%;
+<<<<<<< HEAD
    
+=======
+>>>>>>> origin/main
 }
 
  h1{
