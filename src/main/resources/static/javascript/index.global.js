@@ -1472,6 +1472,7 @@ var FullCalendar = (function (exports) {
         dayHeaders: true,
         initialView: '',
         aspectRatio: 1.35,
+<<<<<<< HEAD
         headerToolbar: {
 <<<<<<< HEAD
             // start: 'title',
@@ -1480,6 +1481,8 @@ var FullCalendar = (function (exports) {
             center: '',
             end: 'today prev,next',
         },
+=======
+>>>>>>> origin/main
         weekends: true,
         weekNumbers: false,
         weekNumberCalculation: 'local',
@@ -1501,7 +1504,7 @@ var FullCalendar = (function (exports) {
         dragRevertDuration: 500,
         dragScroll: true,
         allDayMaintainDuration: false,
-        unselectAuto: true,
+        unselectAuto: false,
         dropAccept: '*',
         eventOrder: 'start,-duration,allDay,title',
         dayPopoverFormat: { month: 'long', day: 'numeric', year: 'numeric' },
@@ -12849,7 +12852,7 @@ var FullCalendar = (function (exports) {
             },
             dayGridMonth: {
                 type: 'dayGrid',
-                duration: { months: 1 },
+                duration: { weeks: 6 },
                 fixedWeekCount: false,
             },
             dayGridYear: {
