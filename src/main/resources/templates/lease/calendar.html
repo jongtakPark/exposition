@@ -4,12 +4,6 @@ xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
 layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-    <title>Calendar</title>
-<link rel="stylesheet" th:href="@{/css/calendar.css}">
-<script type="text/javascript" src="/javascript/index.global.js"></script>
-<script type="text/javascript" src="/javascript/calendar.js"></script>
-=======
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
 <meta name="_csrf" th:content="${_csrf.token}">
     <title>Calendar</title>
@@ -17,42 +11,37 @@ layout:decorate="~{layouts/layout}">
 <script type="text/javascript" src="/javascript/index.global.js"></script>
 <script th:inline="javascript">
 $(document).ready(function(){
-	var list=[[${list}]];
-	if(list!=null){
-	for(var i =0, result=[]; i<list.length; i++){
-		result.push({"title":list[i].approval,"start":list[i].startDay, "end":list[i].endDay});
-	}
-	}
-	var errorMessage = [[${errorMessage}]];
-	if(errorMessage != null){
-		alert(errorMessage);
-	}
-	
+   var list=[[${list}]];
+   for(var i =0, result=[]; i<list.length; i++){
+      result.push({"title":list[i].approval,"start":list[i].startDay, "end":list[i].endDay});
+   }
+   console.log(result);
+   
 var calendarEl = document.getElementById('calendar');
 
 var calendar = new FullCalendar.Calendar(calendarEl, {
-		select: function(start){
+      select: function(start){
         var header = $("meta[name='_csrf_header']").attr('content');
-		var token = $("meta[name='_csrf']").attr('content');
-  		
-  		$.ajax({
-  			url: "/lease/reservation",
-  			type: 'POST',
-  			async:false,
-				data: JSON.stringify(start),
-			contentType: "application/json",
-				dataType: 'json',
-				beforeSend: function(xhr){
+      var token = $("meta[name='_csrf']").attr('content');
+        
+        $.ajax({
+           url: "/lease/reservation",
+           type: 'POST',
+           async:false,
+            data: JSON.stringify(start),
+         contentType: "application/json",
+            dataType: 'json',
+            beforeSend: function(xhr){
     xhr.setRequestHeader(header, token);
-	},
-	success : function(result){
-		},
-		error : function(){
-		}
-   		});
+   },
+   success : function(result){
+      },
+      error : function(){
+      }
+         });
   },
 
-	
+   
   height: '800px',
   expandRows: true,
   slotMinTime: '08:00',
@@ -63,27 +52,37 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   locale: "ko",
   initialDate: '2026-07-17',
   initialView: 'dayGridMonth',
+  firstDay: 1,
+  validRange: {
+    start: '2026-07-17',
+    end: '2026-08-17'
+  },
   editable: false,
   selectable: true,
   nowIndicator: true,
   dayMaxEvents: true, 
   selectOverlap: function(event) {
-	    return event.rendering === 'background';
-	  },
-  validRange: {
-	start: '2026-07-17',
-	end: '2026-08-17'
-	},	  
-  firstDay : 1,
+       return event.rendering === 'background';
+     },
+
   events: result,
 
   
 });
 
 calendar.render();
+$(".fc-toolbar-title").each(function(){
+
+var day = $(this).text();
+
+day = day.replace("2026년 7월 17일 – 8월 16일","2026년 7월 17일 – 8월 16일");
+
+$(this).text(day);
+
+
+});
 });
 </script>
->>>>>>> origin/main
 </head>
 <body>  
 
@@ -91,49 +90,26 @@ calendar.render();
 <div id='calendar-container'>
     <div id='calendar'></div>
   </div>
-<<<<<<< HEAD
+  <form action="/lease/new" th:method="post" enctype="multipart/form-data" class="res1"> 
   <h1>예약하기</h1>
    <div class="main_reservation">
-            <div class="com_a">
-                <div class="com_id"><span>기업명</span></div>
-                <div><input class="com_tex" type="text" placeholder=" 기업명"></div>
-            </div>
-=======
-  <form action="/lease/new" th:method="post" enctype="multipart/form-data"> 
-  <h1>예약하기([[${reservationDto.location}]])</h1>
-   <div class="main_reservation">
             
->>>>>>> origin/main
             <div class="com_b">
                 <div class="com_file">
                     <span>첨부파일</span>
                 </div>
                 <div>
-<<<<<<< HEAD
-                    <input class="com_tex" type="text" placeholder=" 파일첨부">
-                </div>
-                <div class="com_file_ck">
-                    <input  value="첨부" type="button">
-=======
                     <input class="com_tex" type="file" multiple="multiple" name="files">
->>>>>>> origin/main
                 </div>
             </div>
             <div class="com_c">
                 <div class="com_con"><span>상세내용</span></div>
-<<<<<<< HEAD
-                <div><input class="com_tex2" type="text" placeholder=" 상세설명"></div>
-            </div>
-            <input class="regist" type="button" value="예약">                      
-        </div>
-=======
-                <div><input class="com_tex2" type="text" placeholder=" 상세설명" name="content"></div>
+                <div><textarea class="com_tex2" type="text" placeholder=" 상세설명" name="content"></textarea></div>
             </div>
             <input class="regist" type="submit" value="예약">                      
         </div>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
        </form>
->>>>>>> origin/main
 </div>
 </body>
 </html>

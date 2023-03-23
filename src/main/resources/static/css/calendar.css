@@ -3,15 +3,7 @@
   text-decoration: none;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/* í† ìš”ì¼ ë‚ ì§œ íŒŒëž€ìƒ‰ */
-=======
-/* Åä¿äÀÏ ³¯Â¥ ÆÄ¶õ»ö */
->>>>>>> origin/main
-=======
-/* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ ï¿½Ä¶ï¿½ï¿½ï¿½ */
->>>>>>> origin/main
+/*         Â¥  Ä¶    */
 .fc-day-sat a {
   color: blue;
   text-decoration: none;
@@ -20,15 +12,11 @@
 #calendar{
     margin: auto;
     width: 70%;
-<<<<<<< HEAD
-   
-=======
->>>>>>> origin/main
 }
 
  h1{
         margin-top : 20px;
-    	padding-bottom : 20px;
+       padding-bottom : 20px;
         font-size: 45px;
         border-bottom: 1px solid grey;
     }
@@ -101,7 +89,7 @@
 
     .com_file {
         position: relative;
-        background-color: #E6E6E6;
+        background-color: #cdefff;
         float: left;
         text-align: center;
         line-height: 30px;
@@ -109,7 +97,11 @@
         height: 30px;
         margin-left: 20%;
         margin-top: 10px;
-    }    
+    }   
+    .com_file span{
+        color: black;
+        font-weight: bold;
+    } 
     
     .com_file_ck {     
         height: 30px;
@@ -123,7 +115,7 @@
     }
     .com_con {
         position: relative;
-        background-color: #E6E6E6;
+        background-color: #cdefff;
         float: left;
         text-align: center;
         line-height: 30px;
@@ -131,6 +123,11 @@
         height: 30px;
         margin-left: 20%;
         margin-top: 10px;
+    }
+
+    .com_con span{
+        color: black;
+        font-weight: bold;
     }
 
     .com_tex2 {
@@ -150,4 +147,16 @@
         width: 130px;
         height: 30px;
     }
-    .fc-toobar-chunk
+
+    .res1{
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    textarea {
+        resize: none;
+        border: none;
+        outline: none;
+        background-color: #cdefff;
+        padding: 5px;
+    }

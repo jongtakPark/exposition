@@ -1,83 +1,25 @@
-<<<<<<< HEAD
  document.addEventListener('DOMContentLoaded', function() {
-=======
-document.addEventListener('DOMContentLoaded', function() {
-	var startDay;
-   	var endDay;
-	console.log(startDay);
-	
-
-    
-
-    
->>>>>>> origin/main
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
 
-<<<<<<< HEAD
-      height: '800px',
-      expandRows: true,    
-=======
-
-			select: function(start){
-            var header = $("meta[name='_csrf_header']").attr('content');
-			var token = $("meta[name='_csrf']").attr('content');
-      		
-      		$.ajax({
-      			url: "/lease/reservation",
-      			type: 'POST',
-      			async:false,
- 				data: JSON.stringify(start),
-				contentType: "application/json",
- 				dataType: 'json',
- 				beforeSend: function(xhr){
-        xhr.setRequestHeader(header, token);
-    	},
-    	success : function(result){
-    			
-				console.log(result);
-				startDay = result.startDay;
-				console.log(startDay);
-				endDay = result.endDay;
-			},
-			error : function(){
-				
-			}
-       		});
-      },
-		
-		
+      
       height: '800px',
       expandRows: true,
       slotMinTime: '08:00',
       slotMaxTime: '20:00',
->>>>>>> origin/main
       headerToolbar: {
         center: 'title',
       },
       locale: "ko",
-<<<<<<< HEAD
-      initialView: 'dayGridYear',
-      initialDate: '2026-07-01',
-=======
       initialDate: '2026-07-17',
       initialView: 'dayGridMonth',
->>>>>>> origin/main
       editable: true,
       selectable: true,
       nowIndicator: true,
       dayMaxEvents: true, 
       
-<<<<<<< HEAD
-  
-    });
-
-   
-
-    calendar.render();
-  });
-=======
+      
       events: [
         {
           title: 'All Day Event',
@@ -85,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
           title: 'Long Event',
-          start: startDay,
-          end: endDay
+          start: '2026-07-07',
+          end: '2026-07-10'
         },
         {
           groupId: 999,
@@ -135,12 +77,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       ],
       
-		
-		
+      
+      select: function(start){
+            var header = $("meta[name='_csrf_header']").attr('content');
+         var token = $("meta[name='_csrf']").attr('content');
+            $.ajax({
+               url: "/lease/reservation",
+               type: 'POST',
+             data: JSON.stringify(start),
+            contentType: "application/json",
+             dataType: 'json',
+             beforeSend: function(xhr){
+        xhr.setRequestHeader(header, token);
+    }
+             });
+      },
     });
-
-
+    
+    
     calendar.render();
   });
-
->>>>>>> origin/main
+  

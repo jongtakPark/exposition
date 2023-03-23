@@ -1472,17 +1472,6 @@ var FullCalendar = (function (exports) {
         dayHeaders: true,
         initialView: '',
         aspectRatio: 1.35,
-<<<<<<< HEAD
-        headerToolbar: {
-<<<<<<< HEAD
-            // start: 'title',
-=======
->>>>>>> origin/main
-            center: '',
-            end: 'today prev,next',
-        },
-=======
->>>>>>> origin/main
         weekends: true,
         weekNumbers: false,
         weekNumberCalculation: 'local',
@@ -14590,9 +14579,6 @@ var FullCalendar = (function (exports) {
 
     return exports;
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> origin/main
 })({});
