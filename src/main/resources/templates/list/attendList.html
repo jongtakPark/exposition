@@ -5,35 +5,19 @@ layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8">
     <title>Lease</title>
-<link rel="stylesheet" th:href="@{/css/lease.css}">
+<link rel="stylesheet" th:href="@{/css/attendList.css}">
 </head>
-<th:block layout:fragment="script">
-<script th:inline="javascript">
-$(document).ready(function(){
-		var errorMessage = [[${errorMessage}]];
-		if(errorMessage != null){
-			alert(errorMessage);
-	}
-});
-</script>
-</th:block>
 <body>  
 <div layout:fragment="content">    
         <div class="attend">
-            <h1>임대문의</h1>
+            <h1>업체등록목록</h1>
             <div class="cont_image">
-                <form action="/lease/calendar" th:object="${reservationDto}">
                 <div class="a-1">
-                    <input type="hidden" name="location" value="Aa101">
-                    <input type="submit" value="Aa101">
+                    <p>Aa-101</p>
                 </div>
-                </form>
-                <form action="/lease/calendar" th:object="${reservationDto}">
                 <div class="a-2">
-                    <input type="hidden" name="location" value="Aa102">
-                    <input type="submit" value="Aa102">
+                    <p>Aa-102</p>
                 </div>
-                </form>
                 <div class="a-3">
                     <p>Ac-103</p>
                 </div>
@@ -88,36 +72,21 @@ $(document).ready(function(){
                 <div class="a-20">
                     <p>Ac-102</p>
                 </div>
-                <form action="/lease/calendar" th:object="${reservationDto}">
                 <div class="b-1">
-                    <input type="hidden" name="location" value="Ba101">
-                    <input type="submit" value="Ba101">
+                    <p>Ba-101</p>
                 </div>
-                </form>
-                <form action="/lease/calendar" th:object="${reservationDto}">
                 <div class="b-2">
-                    <input type="hidden" name="location" value="Ba102">
-                    <input type="submit" value="Ba102">
+                    <p>Ba-102</p>
                 </div>
-                </form>
-                <form action="/lease/calendar" th:object="${reservationDto}">
                 <div class="b-3">
-                    <input type="hidden" name="location" value="Ba103">
-                    <input type="submit" value="Ba103">
+                    <p>Ba-103</p>
                 </div>
-                </form>
-                <form action="/lease/calendar" th:object="${reservationDto}">
                 <div class="b-4">
-                    <input type="hidden" name="location" value="Ba104">
-                    <input type="submit" value="Ba104">
+                    <p>Ba-104</p>
                 </div>
-                </form>
-                <form action="/lease/calendar" th:object="${reservationDto}">
                 <div class="b-5">
-                    <input type="hidden" name="location" value="Ba105">
-                    <input type="submit" value="Ba105">
+                    <p>Ba-105</p>
                 </div>
-                </form>
                 <div class="b-6">
                     <p>Ba-106</p>
                 </div>
@@ -247,13 +216,7 @@ $(document).ready(function(){
                 <div class="d-16">
                     <p>Da-105</p>
                 </div>
-<<<<<<< HEAD
-            </div>           
-=======
             </div>
-
->>>>>>> origin/main
-         
     </div>
 </div>
 </body></html>

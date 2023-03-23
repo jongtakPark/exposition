@@ -18,10 +18,15 @@ layout:decorate="~{layouts/layout}">
 <script th:inline="javascript">
 $(document).ready(function(){
 	var list=[[${list}]];
+	if(list!=null){
 	for(var i =0, result=[]; i<list.length; i++){
 		result.push({"title":list[i].approval,"start":list[i].startDay, "end":list[i].endDay});
 	}
-	console.log(result);
+	}
+	var errorMessage = [[${errorMessage}]];
+	if(errorMessage != null){
+		alert(errorMessage);
+	}
 	
 var calendarEl = document.getElementById('calendar');
 
@@ -65,7 +70,11 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
   selectOverlap: function(event) {
 	    return event.rendering === 'background';
 	  },
-
+  validRange: {
+	start: '2026-07-17',
+	end: '2026-08-17'
+	},	  
+  firstDay : 1,
   events: result,
 
   
@@ -91,7 +100,7 @@ calendar.render();
             </div>
 =======
   <form action="/lease/new" th:method="post" enctype="multipart/form-data"> 
-  <h1>예약하기</h1>
+  <h1>예약하기([[${reservationDto.location}]])</h1>
    <div class="main_reservation">
             
 >>>>>>> origin/main

@@ -12852,7 +12852,7 @@ var FullCalendar = (function (exports) {
             },
             dayGridMonth: {
                 type: 'dayGrid',
-                duration: { weeks: 6 },
+                duration: { weeks: 5 },
                 fixedWeekCount: false,
             },
             dayGridYear: {
