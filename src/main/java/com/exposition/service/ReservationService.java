@@ -3,18 +3,16 @@ package com.exposition.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.exposition.dto.FileDto;
 import com.exposition.dto.ReservationDto;
-import com.exposition.dto.TourBoardDto;
 import com.exposition.entity.Files;
 import com.exposition.entity.Reservation;
-import com.exposition.entity.TourBoard;
 import com.exposition.repository.FileRepository;
 import com.exposition.repository.ReservationRepository;
 
@@ -48,32 +46,22 @@ public class ReservationService {
 	}
 	
 	//업체등록목록 페이지에 등록한 업체 보여주기
-	public List<ReservationDto> getAttendCom(ReservationDto reservationDto){
-		return reservationRepository.getAttendCom(reservationDto);
+	public Page<ReservationDto> getAttendCom(ReservationDto reservationDto, Pageable pageable){
+		return reservationRepository.getAttendCom(reservationDto, pageable);
 	}
 	
 	//업체등록할때 첨부했던 사진 불러오기
 	@Transactional(readOnly=true)
-	public ReservationDto getReservationList(List<ReservationDto> reservationDto) {
-		System.out.println(reservationDto);
-		System.out.println("확인1");
-		ReservationDto reservationDto1 = null;
+	public List<ReservationDto> getReservationList(List<ReservationDto> reservationDto) {
 		for(int i=0; i<reservationDto.size(); i++) {
 			List<Files> fileList = fileRepository.findByReservationId(reservationDto.get(i).getId());
-			System.out.println(fileList);
-			System.out.println("확인2");
 			List<FileDto> fileDtoList = new ArrayList<>();
 			for(Files file : fileList) {
 				FileDto fileDto = FileDto.of(file);
 				fileDtoList.add(fileDto);
-				System.out.println(fileDtoList);
-				System.out.println("확인3");
 			}
-			Reservation reservation = reservationRepository.findById(reservationDto.get(i).getId()).orElseThrow(EntityNotFoundException::new);
-			reservationDto1 = ReservationDto.of(reservation);
-			reservationDto1.setFileDtoList(fileDtoList);
-			
+			reservationDto.get(i).setFileDtoList(fileDtoList);
 		}
-		return reservationDto1;
+		return reservationDto;
 	}
 }

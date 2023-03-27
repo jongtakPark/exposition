@@ -36,8 +36,18 @@ public class CompanyService implements UserDetailsService {
 	}
 	
 	//기업회원 전체 조회
-	public Page<Company> findAllComapny(Pageable pageable){
-		return companyRepository.findAll(pageable);
+	public Page<CompanyFormDto> findAllComapny(Pageable pageable){
+		return companyRepository.findAllCom(pageable);
+	}
+	
+	//기업회원 갯수 조회
+	public Long findAllComCount() {
+		return companyRepository.findAllComCount();
+	}
+	
+	//예약완료된 기업 갯수 조회
+	public Long findSucReservationCom() {
+		return companyRepository.findSucReservationCom();
 	}
 	
 	public Company findByCom(String com) {
