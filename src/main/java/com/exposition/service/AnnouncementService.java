@@ -16,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AnnouncementService {
 
-	
 	private final AnnouncementRepository announcementRepository;
+	
 	//공지사항 페이지로 이동
 	public Page<Announcement> findAll(Pageable pageable){
 		return announcementRepository.findAll(pageable);
@@ -43,5 +43,4 @@ public class AnnouncementService {
 	public void announcementDelete(Long id) {
 		announcementRepository.deleteById(id);
 	}
-
 }
