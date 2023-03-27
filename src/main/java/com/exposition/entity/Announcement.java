@@ -2,50 +2,44 @@ package com.exposition.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
-import com.exposition.dto.AnnouncementDto;
+import com.exposition.dto.FreeBoardDto;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Entity
-@Data
 @Table(name="announcement")
-@RequiredArgsConstructor
-public class Announcement extends BaseEntity {
+@Data
+public class Announcement extends BaseEntity{
+
+	@Id
+	@Column(name="announcement_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
-		// 글번호
-			@Id
-			@Column(name="announcement_id")
-			@GeneratedValue(strategy = GenerationType.AUTO)
-			private Long id;
-			
-		// 제목
-			@NotEmpty(message = "제목을 적어주세요.")
-			private String title;
-
-		// 내용
-			@Column(length = 2000)
-			private String content; 
-			
-
-			@ManyToOne
-			@JoinColumn(name = "admin_id")
-			private Member admin;
-			
-			public static Announcement createannouncement(AnnouncementDto announcementDto) {
-				Announcement announcement = new Announcement();
-				announcement.setTitle(announcementDto.getTitle());
-				announcement.setContent(announcementDto.getContent());
-				announcement.setId(announcementDto.getId());
-				return announcement;
-			}
-
+	@NotNull
+	private String title;
+	
+	@NotNull
+	private String content;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id")
+	private Member member;
+	
+	public static Announcement createAnnouncement(FreeBoardDto freeBoardDto) {
+		Announcement announcement = new Announcement();
+		announcement.setTitle(freeBoardDto.getTitle());
+		announcement.setContent(freeBoardDto.getContent());
+		announcement.setId(freeBoardDto.getId());
+		return announcement;
+	}
 }
