@@ -54,7 +54,7 @@ $(function(){
                   valueArr.push(list[i].value);
               }
           }
-          console.log(valueArr)
+
           if (valueArr.length == 0){
              alert("선택된 글이 없습니다.");
           }
@@ -65,7 +65,6 @@ $(function(){
             $.ajax({
                 url : url,                    // 전송 URL
                 type : 'POST',                // POST 방식
-                async:false,
                 data : {
                    valueArr :   valueArr     // 보내고자 하는 data 변수 설정
                 },
@@ -131,7 +130,7 @@ $(function(){
          <a href="/introduction/keywordWrite" class="regist">글쓰기</a>
          
          
-            <input type="button" name="keyword.id" value="선택삭제" onclick="deleteValue();">
+            <input type="button"  value="선택삭제" onclick="deleteValue();">
          
      </div>     
 </div>
