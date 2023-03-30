@@ -59,9 +59,21 @@ $(document).ready(function(){
     </form>
     <form th:action="@{/news/announcementDelete/{id}(id=${freeBoardDto.id})}" th:method="delete">	
     	<div class="info_submit">
+<<<<<<< HEAD
 			<a th:href="@{/news/announcementModify/{id}(id=${freeBoardDto.id})}">수정</a>
 			<button
 			 type="submit" class="submit">삭제하기</button>
+=======
+<<<<<<< HEAD:src/main/resources/templates/board/view.html
+			<a th:if = "${freeboard == mid}"  href="/board/modify" >수정</a>
+			<div th:if = "${ad=='관리자'}" class="a_hide"></div>
+			<button th:if ="${freeboard == mid || ad == '관리자'} " type="submit" class="submit">삭제하기</button>
+=======
+			<a th:href="@{/news/announcementModify/{id}(id=${freeBoardDto.id})}">수정</a>
+			<button
+			 type="submit" class="submit">삭제하기</button>
+>>>>>>> main:src/main/resources/templates/news/announcementView.html
+>>>>>>> origin/huk
          </div>
     </form>
    </div>

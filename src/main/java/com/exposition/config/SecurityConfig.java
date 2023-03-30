@@ -56,7 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.anyRequest().authenticated(); // 나머지 경로들은 모두 인증을 요구하도록 설정
 		
 		http.exceptionHandling() // 인증되지 않은 사용자가 리소스에 접근하였을 때 수행되는 핸들러 등록
-		.accessDeniedPage("/error_user");
+//		.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+//		.accessDeniedHandler(new CustomAccessDeniedHandler()); 
+		.accessDeniedPage("/");
+		
+		
 	}
 	
 	
@@ -78,7 +82,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+<<<<<<< HEAD
 		web.ignoring().antMatchers("/css/**", "/javascript/**", "/images/**","/video/**" , "/error", "/docs/**", "/image/**");
+=======
+		web.ignoring().antMatchers("/css/**", "/javascript/**", "/images/**","/img/**","/video/**" , "/error", "/docs/**");
+>>>>>>> origin/huk
 	}
 	
 }

@@ -363,7 +363,27 @@
 .delete  > button:hover{
     background: aqua;
 }
+<<<<<<< HEAD
 textarea{
     resize: none;
     outline: none;
+=======
+<<<<<<< HEAD
+
+.a_hide{
+	display : display;
+    width: 130px;
+    text-align : center;
+    height: 50px;
+    line-height : 47px;
+    border-radius: 20px;
+    font-size: 18px;
+    margin-left: 70%;
+    float : left;
+=======
+textarea{
+    resize: none;
+    outline: none;
+>>>>>>> main
+>>>>>>> origin/huk
 }
