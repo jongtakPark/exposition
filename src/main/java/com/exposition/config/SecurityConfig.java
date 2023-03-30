@@ -82,11 +82,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-<<<<<<< HEAD
-		web.ignoring().antMatchers("/css/**", "/javascript/**", "/images/**","/video/**" , "/error", "/docs/**", "/image/**");
-=======
-		web.ignoring().antMatchers("/css/**", "/javascript/**", "/images/**","/img/**","/video/**" , "/error", "/docs/**");
->>>>>>> origin/huk
+
+	web.ignoring().antMatchers("/css/**", "/javascript/**", "/images/**","/img/**","/video/**" , "/error", "/docs/**");
+
 	}
 	
 }
