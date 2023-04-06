@@ -35,8 +35,6 @@ $(document).ready(function(){
 
 //일반 회원 아아디 찾기
 $("#find-id-btn").click(function(){
-<<<<<<< HEAD
-=======
 	var email = $("#email1").val();
 	var name = $("#name").val();
 	var sMsg = $("#sMsg1")
@@ -88,7 +86,6 @@ $("#find-pw-btn").click(function(){
 //기업 회원 비밀번호 찾기(String으로 값 받을때)
 $("#find-com-pw-btn").click(function(){
 	var com = $("#com1").val();
->>>>>>> origin/main
 	var email = $("#email").val();
 	var name = $("#name").val();
 	var sMsg = $("#sMsg")
