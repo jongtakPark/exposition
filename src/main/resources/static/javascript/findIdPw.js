@@ -35,6 +35,60 @@ $(document).ready(function(){
 
 //일반 회원 아아디 찾기
 $("#find-id-btn").click(function(){
+<<<<<<< HEAD
+=======
+	var email = $("#email1").val();
+	var name = $("#name").val();
+	var sMsg = $("#sMsg1")
+	var eMsg = $("#eMsg1")
+	$.ajax({
+            type: "post",
+			url: "/signup/findid",
+			data : { "email" : email,  "name" : name },
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+    		},
+			success : function(result){
+				showSuccMsg(sMsg,"입력하신 이메일에서 아이디를 확인해 주세요");
+				eMsg.hide();
+			},
+			error : function(){
+				showErrorMsg(eMsg,"이름 또는 이메일을 다시 확인해주세요.");
+				sMsg.hide();
+			}
+		});
+});
+
+//일반 회원 비밀번호 찾기(String으로 값 받을때)
+$("#find-pw-btn").click(function(){
+	var mid = $("#mid").val();
+	var email = $("#email2").val();
+	var sMsg = $("#sMsg2");
+	var eMsg = $("#eMsg2");
+	var sendData = "mid="+mid+"&email="+email;
+	$.ajax({
+            type: "post",
+			url: "/signup/findpw",
+			data : sendData,
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+    		},
+			success : function(result){
+				showSuccMsg(sMsg,"입력하신 이메일에서 임시 비밀번호를 확인해 주세요");
+				eMsg.hide();
+			},
+			error : function(){
+				showErrorMsg(eMsg,"이름 또는 이메일을 다시 확인해주세요.");
+				sMsg.hide();
+			}
+		});
+});
+
+
+//기업 회원 비밀번호 찾기(String으로 값 받을때)
+$("#find-com-pw-btn").click(function(){
+	var com = $("#com1").val();
+>>>>>>> origin/main
 	var email = $("#email").val();
 	var name = $("#name").val();
 	var sMsg = $("#sMsg")
